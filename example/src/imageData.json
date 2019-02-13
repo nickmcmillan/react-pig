@@ -1,0 +1,926 @@
+[
+  {
+    "birthTime": "2018-12-29T16:57:54.000Z",
+    "dominantColor": "#29241A",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549797446/mcfrench/p84r97mtusxnwg3rojki.jpg",
+    "aspectRatio": 1.774,
+    "exif": {
+      "ExposureTime": "1/12",
+      "ApertureValue": "5.7",
+      "ISO": "6400"
+    }
+  },
+  {
+    "birthTime": "2018-12-29T16:59:20.000Z",
+    "dominantColor": "#786C63",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549797463/mcfrench/rdyp4l4h3qwzlaxt0arb.jpg",
+    "aspectRatio": 0.564,
+    "exif": {
+      "ExposureTime": "1/18",
+      "ApertureValue": "5.7",
+      "ISO": "6400"
+    }
+  },
+  {
+    "birthTime": "2018-12-30T14:00:44.000Z",
+    "dominantColor": "#857E7F",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549797587/mcfrench/y6zy1ctkb7yupuremio7.jpg",
+    "aspectRatio": 0.564,
+    "exif": {
+      "ExposureTime": "1/60",
+      "ApertureValue": "2.0",
+      "ISO": "320"
+    }
+  },
+  {
+    "birthTime": "2018-11-04T21:21:18.588Z",
+    "dominantColor": "#2C2A26",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549799019/mcfrench/bjhlwe0kusybwxqp4pc4.jpg",
+    "aspectRatio": 1.333,
+    "exif": {
+      "ExposureTime": "1/17",
+      "ApertureValue": "2.2",
+      "ISO": "250"
+    }
+  },
+  {
+    "birthTime": "2018-11-04T21:21:19.329Z",
+    "dominantColor": "#2C1C15",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549799026/mcfrench/y9zoj3tteafovm19slmg.jpg",
+    "aspectRatio": 0.75,
+    "exif": {
+      "ExposureTime": "1/17",
+      "ApertureValue": "2.2",
+      "ISO": "640"
+    }
+  },
+  {
+    "birthTime": "2018-11-04T21:20:54.028Z",
+    "dominantColor": "#744F3C",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549799043/mcfrench/wjlucyieqs02ucyuv4h1.jpg",
+    "aspectRatio": 0.75,
+    "exif": {
+      "ExposureTime": "1/304",
+      "ApertureValue": "2.2",
+      "ISO": "25"
+    }
+  },
+  {
+    "birthTime": "2018-11-04T21:20:41.482Z",
+    "dominantColor": "#867970",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549799070/mcfrench/kseidm0zaavxuo888dvd.jpg",
+    "aspectRatio": 0.75,
+    "exif": {
+      "ExposureTime": "1/50",
+      "ApertureValue": "2.2",
+      "ISO": "25"
+    }
+  },
+  {
+    "birthTime": "2018-11-04T21:20:41.786Z",
+    "dominantColor": "#CABDAA",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549799080/mcfrench/ghfndq6gr55smnkqxukz.jpg",
+    "aspectRatio": 0.75,
+    "exif": {
+      "ExposureTime": "1/33",
+      "ApertureValue": "2.2",
+      "ISO": "80"
+    }
+  },
+  {
+    "birthTime": "2018-11-04T21:20:27.288Z",
+    "dominantColor": "#CFC7BA",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549799090/mcfrench/huhv7rbd03j438ir1bfz.jpg",
+    "aspectRatio": 0.75,
+    "exif": {
+      "ExposureTime": "1/33",
+      "ApertureValue": "2.2",
+      "ISO": "160"
+    }
+  },
+  {
+    "birthTime": "2018-11-04T21:20:27.284Z",
+    "dominantColor": "#704431",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549799097/mcfrench/dxuajr5voyu5poeu4l1i.jpg",
+    "aspectRatio": 0.75,
+    "exif": {
+      "ExposureTime": "1/33",
+      "ApertureValue": "2.2",
+      "ISO": "200"
+    }
+  },
+  {
+    "birthTime": "2018-11-04T20:58:06.714Z",
+    "dominantColor": "#33312B",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549799103/mcfrench/oco4sezje5mqm81yqcmv.jpg",
+    "aspectRatio": 0.75,
+    "exif": {
+      "ExposureTime": "1/50",
+      "ApertureValue": "2.2",
+      "ISO": "32"
+    }
+  },
+  {
+    "birthTime": "2018-11-04T20:58:06.991Z",
+    "dominantColor": "#835A3F",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549799122/mcfrench/d1wvceysjauznd0ed1h4.jpg",
+    "aspectRatio": 0.75,
+    "exif": {
+      "ExposureTime": "1/33",
+      "ApertureValue": "2.2",
+      "ISO": "64"
+    }
+  },
+  {
+    "birthTime": "2018-11-04T20:57:58.524Z",
+    "dominantColor": "#8B2F33",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549799127/mcfrench/pdoi5yoatyijnm38c54c.jpg",
+    "aspectRatio": 0.75,
+    "exif": {
+      "ExposureTime": "1/101",
+      "ApertureValue": "2.2",
+      "ISO": "25"
+    }
+  },
+  {
+    "birthTime": "2018-11-04T20:57:47.401Z",
+    "dominantColor": "#2E1B11",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549799135/mcfrench/vxkzhjh4m6vq77o7qaey.jpg",
+    "aspectRatio": 0.75,
+    "exif": {
+      "ExposureTime": "1/33",
+      "ApertureValue": "2.2",
+      "ISO": "32"
+    }
+  },
+  {
+    "birthTime": "2018-11-04T20:57:47.394Z",
+    "dominantColor": "#36322F",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549799144/mcfrench/hq8r6ta84dr5orxvkaxf.jpg",
+    "aspectRatio": 0.75,
+    "exif": {
+      "ExposureTime": "1/17",
+      "ApertureValue": "2.2",
+      "ISO": "250"
+    }
+  },
+  {
+    "birthTime": "2018-11-04T20:57:34.849Z",
+    "dominantColor": "#1A0E0D",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549799152/mcfrench/lqhy4xtva4kc9fjxmjxs.jpg",
+    "aspectRatio": 0.75,
+    "exif": {
+      "ExposureTime": "1/25",
+      "ApertureValue": "2.2",
+      "ISO": "200"
+    }
+  },
+  {
+    "birthTime": "2018-11-04T20:57:35.504Z",
+    "dominantColor": "#1E1310",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549799161/mcfrench/vgxhe5assvgvdg8a2lge.jpg",
+    "aspectRatio": 1.333,
+    "exif": {
+      "ExposureTime": "1/17",
+      "ApertureValue": "2.2",
+      "ISO": "250"
+    }
+  },
+  {
+    "birthTime": "2018-11-04T20:31:13.497Z",
+    "dominantColor": "#8F7352",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549799169/mcfrench/rcahnz3vmm3nm0uqsvke.jpg",
+    "aspectRatio": 0.75,
+    "exif": {
+      "ExposureTime": "1/375",
+      "ApertureValue": "2.2",
+      "ISO": "25"
+    }
+  },
+  {
+    "birthTime": "2018-11-04T20:31:02.065Z",
+    "dominantColor": "#373430",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549799182/mcfrench/v4ctrkmt5vbixhkqofpr.jpg",
+    "aspectRatio": 0.75,
+    "exif": {
+      "ExposureTime": "1/33",
+      "ApertureValue": "2.2",
+      "ISO": "25"
+    }
+  },
+  {
+    "birthTime": "2018-11-04T20:31:02.384Z",
+    "dominantColor": "#7C5B46",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549799196/mcfrench/snwizry36dwrqp9wdyuh.jpg",
+    "aspectRatio": 0.75,
+    "exif": {
+      "ExposureTime": "1/33",
+      "ApertureValue": "2.2",
+      "ISO": "25"
+    }
+  },
+  {
+    "birthTime": "2018-11-04T20:30:39.177Z",
+    "dominantColor": "#7B4A32",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549799209/mcfrench/ep38xxowouxdoqxxk7ul.jpg",
+    "aspectRatio": 1.333,
+    "exif": {
+      "ExposureTime": "1/17",
+      "ApertureValue": "2.2",
+      "ISO": "400"
+    }
+  },
+  {
+    "birthTime": "2018-11-04T20:30:39.502Z",
+    "dominantColor": "#84634C",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549799222/mcfrench/dipyesgekerriy9trrsd.jpg",
+    "aspectRatio": 0.75,
+    "exif": {
+      "ExposureTime": "1/33",
+      "ApertureValue": "2.2",
+      "ISO": "125"
+    }
+  },
+  {
+    "birthTime": "2018-11-04T20:30:31.719Z",
+    "dominantColor": "#7F4B32",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549799229/mcfrench/konvkegyxsrw7gc598ni.jpg",
+    "aspectRatio": 0.75,
+    "exif": {
+      "ExposureTime": "1/17",
+      "ApertureValue": "2.2",
+      "ISO": "400"
+    }
+  },
+  {
+    "birthTime": "2018-11-04T20:30:24.240Z",
+    "dominantColor": "#24160E",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549799243/mcfrench/kavt2lehpf1m4vrntpm3.jpg",
+    "aspectRatio": 0.75,
+    "exif": {
+      "ExposureTime": "1/17",
+      "ApertureValue": "2.2",
+      "ISO": "500"
+    }
+  },
+  {
+    "birthTime": "2018-11-04T20:30:12.453Z",
+    "dominantColor": "#292317",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549799251/mcfrench/ubfwwdksipzztnk3wl2k.jpg",
+    "aspectRatio": 0.75,
+    "exif": {
+      "ExposureTime": "1/793",
+      "ApertureValue": "2.2",
+      "ISO": "25"
+    }
+  },
+  {
+    "birthTime": "2018-11-04T20:30:12.725Z",
+    "dominantColor": "#272B2C",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549799260/mcfrench/zgqw26kae5m6ptyloadq.jpg",
+    "aspectRatio": 0.75,
+    "exif": {
+      "ExposureTime": "1/315",
+      "ApertureValue": "2.2",
+      "ISO": "25"
+    }
+  },
+  {
+    "birthTime": "2018-11-04T20:30:12.725Z",
+    "dominantColor": "#2F2E2A",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549799271/mcfrench/cuu6burx5hcanrpuzosy.jpg",
+    "aspectRatio": 0.75,
+    "exif": {
+      "ExposureTime": "1/236",
+      "ApertureValue": "2.2",
+      "ISO": "25"
+    }
+  },
+  {
+    "birthTime": "2018-11-04T20:29:53.215Z",
+    "dominantColor": "#2C2925",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549799278/mcfrench/j5crmdwsywh2ijs0smvu.jpg",
+    "aspectRatio": 0.75,
+    "exif": {
+      "ExposureTime": "1/33",
+      "ApertureValue": "2.2",
+      "ISO": "32"
+    }
+  },
+  {
+    "birthTime": "2018-11-04T20:27:08.131Z",
+    "dominantColor": "#352B25",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549799286/mcfrench/wdv2ccg3xnercp5ctufj.jpg",
+    "aspectRatio": 0.75,
+    "exif": {
+      "ExposureTime": "1/100",
+      "ApertureValue": "2.2",
+      "ISO": "32"
+    }
+  },
+  {
+    "birthTime": "2019-02-09T09:31:10.529Z",
+    "dominantColor": "#383531",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549799293/mcfrench/rcaiqkkn0qulvwzifv2e.jpg",
+    "aspectRatio": 1.333,
+    "exif": {
+      "ExposureTime": "1/17",
+      "ApertureValue": "2.2",
+      "ISO": "200"
+    }
+  },
+  {
+    "birthTime": "2018-11-04T20:26:58.430Z",
+    "dominantColor": "#191C1B",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549799302/mcfrench/ytueixsn0fe64z7cue36.jpg",
+    "aspectRatio": 0.75,
+    "exif": {
+      "ExposureTime": "1/319",
+      "ApertureValue": "2.2",
+      "ISO": "25"
+    }
+  },
+  {
+    "birthTime": "2018-11-04T20:26:58.431Z",
+    "dominantColor": "#3D3527",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549799310/mcfrench/h2toyeb5biuavkbqwq4m.jpg",
+    "aspectRatio": 0.75,
+    "exif": {
+      "ExposureTime": "1/17",
+      "ApertureValue": "2.2",
+      "ISO": "500"
+    }
+  },
+  {
+    "birthTime": "2018-11-04T10:02:19.171Z",
+    "dominantColor": "#1B1F10",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549799339/mcfrench/a24xj7diwpdrqxjoa813.jpg",
+    "aspectRatio": 0.75,
+    "exif": {
+      "ExposureTime": "1/17",
+      "ApertureValue": "2.2",
+      "ISO": "250"
+    }
+  },
+  {
+    "birthTime": "2018-11-04T10:02:19.491Z",
+    "dominantColor": "#3C2719",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549799346/mcfrench/izmflto9mezxw3lbcxl7.jpg",
+    "aspectRatio": 0.75,
+    "exif": {
+      "ExposureTime": "1/33",
+      "ApertureValue": "2.2",
+      "ISO": "200"
+    }
+  },
+  {
+    "birthTime": "2018-11-09T09:06:37.748Z",
+    "dominantColor": "#3A3420",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549799368/mcfrench/gpmxly3hfus8b0sxnoab.jpg",
+    "aspectRatio": 0.75,
+    "exif": {
+      "ExposureTime": "1/100",
+      "ApertureValue": "2.2",
+      "ISO": "25"
+    }
+  },
+  {
+    "birthTime": "2018-11-09T09:06:37.751Z",
+    "dominantColor": "#34332F",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549799380/mcfrench/u5wlobli1zuvt5q9twhb.jpg",
+    "aspectRatio": 0.75,
+    "exif": {
+      "ExposureTime": "1/100",
+      "ApertureValue": "2.2",
+      "ISO": "25"
+    }
+  },
+  {
+    "birthTime": "2018-11-10T00:13:36.859Z",
+    "dominantColor": "#311D12",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549799392/mcfrench/l6efmy4zaingndb8dkzh.jpg",
+    "aspectRatio": 0.75,
+    "exif": {
+      "ExposureTime": "1/17",
+      "ApertureValue": "2.2",
+      "ISO": "640"
+    }
+  },
+  {
+    "birthTime": "2018-11-10T00:13:26.656Z",
+    "dominantColor": "#CCAF7B",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549799403/mcfrench/rqgbqp7itdhl3t7dlfwc.jpg",
+    "aspectRatio": 0.75,
+    "exif": {
+      "ExposureTime": "1/20",
+      "ApertureValue": "2.2",
+      "ISO": "200"
+    }
+  },
+  {
+    "birthTime": "2018-11-10T12:48:08.629Z",
+    "dominantColor": "#EEF7F8",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549799411/mcfrench/vwdgtcuiujvl6bkrr8vq.jpg",
+    "aspectRatio": 0.75,
+    "exif": {
+      "ExposureTime": "1/33",
+      "ApertureValue": "2.2",
+      "ISO": "40"
+    }
+  },
+  {
+    "birthTime": "2018-11-10T12:43:43.848Z",
+    "dominantColor": "#262521",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549799421/mcfrench/myxiit0wr1ykoxhs7wpe.jpg",
+    "aspectRatio": 0.75,
+    "exif": {
+      "ExposureTime": "1/158",
+      "ApertureValue": "2.2",
+      "ISO": "25"
+    }
+  },
+  {
+    "birthTime": "2018-11-10T15:45:12.417Z",
+    "dominantColor": "#22221E",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549799429/mcfrench/rpiefov8meibscoz3scd.jpg",
+    "aspectRatio": 0.75,
+    "exif": {
+      "ExposureTime": "1/33",
+      "ApertureValue": "2.2",
+      "ISO": "32"
+    }
+  },
+  {
+    "birthTime": "2018-11-10T16:06:09.216Z",
+    "dominantColor": "#606361",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549799439/mcfrench/knltbxt2pveioe1lgs4y.jpg",
+    "aspectRatio": 0.75,
+    "exif": {
+      "ExposureTime": "1/17",
+      "ApertureValue": "2.2",
+      "ISO": "320"
+    }
+  },
+  {
+    "birthTime": "2018-11-10T16:06:09.217Z",
+    "dominantColor": "#FFFFFF",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549799446/mcfrench/f6uslkgnaz9zsimfij0t.jpg",
+    "aspectRatio": 0.75,
+    "exif": {
+      "ExposureTime": "1/17",
+      "ApertureValue": "2.2",
+      "ISO": "250"
+    }
+  },
+  {
+    "birthTime": "2018-11-10T23:50:21.161Z",
+    "dominantColor": "#1B0F0C",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549799458/mcfrench/xopbltbv2mnskwfvbpzf.jpg",
+    "aspectRatio": 0.75,
+    "exif": {
+      "ExposureTime": "1/17",
+      "ApertureValue": "2.2",
+      "ISO": "200"
+    }
+  },
+  {
+    "birthTime": "2018-11-10T23:50:21.159Z",
+    "dominantColor": "#321D1A",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549799467/mcfrench/el8sd5a450q0ulcapdg7.jpg",
+    "aspectRatio": 0.75,
+    "exif": {
+      "ExposureTime": "1/17",
+      "ApertureValue": "2.2",
+      "ISO": "1000"
+    }
+  },
+  {
+    "birthTime": "2018-11-10T23:50:09.447Z",
+    "dominantColor": "#322116",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549799481/mcfrench/oqistxub0tx96jdqi47h.jpg",
+    "aspectRatio": 0.75,
+    "exif": {
+      "ExposureTime": "1/17",
+      "ApertureValue": "2.2",
+      "ISO": "250"
+    }
+  },
+  {
+    "birthTime": "2018-11-10T23:50:09.446Z",
+    "dominantColor": "#2C2826",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549799494/mcfrench/trouix35sbglagokzegm.jpg",
+    "aspectRatio": 0.75,
+    "exif": {
+      "ExposureTime": "1/17",
+      "ApertureValue": "2.2",
+      "ISO": "200"
+    }
+  },
+  {
+    "birthTime": "2018-11-11T16:39:33.550Z",
+    "dominantColor": "#7B5341",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549799501/mcfrench/bzagdu7ape838vptlz3g.jpg",
+    "aspectRatio": 0.75,
+    "exif": {
+      "ExposureTime": "1/20",
+      "ApertureValue": "2.2",
+      "ISO": "200"
+    }
+  },
+  {
+    "birthTime": "2018-11-11T19:06:53.484Z",
+    "dominantColor": "#373533",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549799509/mcfrench/t6g1rlsrgbhavjtxklzh.jpg",
+    "aspectRatio": 0.75,
+    "exif": {
+      "ExposureTime": "1/17",
+      "ApertureValue": "2.2",
+      "ISO": "250"
+    }
+  },
+  {
+    "birthTime": "2018-11-11T19:06:53.494Z",
+    "dominantColor": "#E6DED2",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549799517/mcfrench/abojjqnzbjsdln59xoau.jpg",
+    "aspectRatio": 0.75,
+    "exif": {
+      "ExposureTime": "1/17",
+      "ApertureValue": "2.2",
+      "ISO": "500"
+    }
+  },
+  {
+    "birthTime": "2018-11-11T19:06:55.475Z",
+    "dominantColor": "#89AAD4",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549799524/mcfrench/fvzmcf5ffauvixrjczhf.jpg",
+    "aspectRatio": 0.75,
+    "exif": {
+      "ExposureTime": "1/33",
+      "ApertureValue": "2.2",
+      "ISO": "250"
+    }
+  },
+  {
+    "birthTime": "2018-11-12T08:36:32.015Z",
+    "dominantColor": "#2B2A27",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549799535/mcfrench/bt4r6meegzhiqxdprtpb.jpg",
+    "aspectRatio": 0.75,
+    "exif": {
+      "ExposureTime": "1/50",
+      "ApertureValue": "2.2",
+      "ISO": "25"
+    }
+  },
+  {
+    "birthTime": "2018-11-15T19:33:24.568Z",
+    "dominantColor": "#3C2648",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549799543/mcfrench/xvsvfuwhlxsurzpfml4c.jpg",
+    "aspectRatio": 0.75,
+    "exif": {
+      "ExposureTime": "1/17",
+      "ApertureValue": "2.2",
+      "ISO": "200"
+    }
+  },
+  {
+    "birthTime": "2018-11-16T12:15:39.446Z",
+    "dominantColor": "#D3CDC5",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549799556/mcfrench/hbzisakrzzsjdntanjgs.jpg",
+    "aspectRatio": 0.75,
+    "exif": {
+      "ExposureTime": "1/33",
+      "ApertureValue": "2.2",
+      "ISO": "32"
+    }
+  },
+  {
+    "birthTime": "2018-11-17T12:17:24.714Z",
+    "dominantColor": "#313636",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549799575/mcfrench/dsjzeicadaqmjtylhnwz.jpg",
+    "aspectRatio": 0.75,
+    "exif": {
+      "ExposureTime": "1/33",
+      "ApertureValue": "2.2",
+      "ISO": "64"
+    }
+  },
+  {
+    "birthTime": "2018-11-17T16:22:31.279Z",
+    "dominantColor": "#77533B",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549799582/mcfrench/yrud6rmotgwcpsqdbd4k.jpg",
+    "aspectRatio": 0.75,
+    "exif": {
+      "ExposureTime": "1/17",
+      "ApertureValue": "2.2",
+      "ISO": "320"
+    }
+  },
+  {
+    "birthTime": "2018-11-17T18:40:33.391Z",
+    "dominantColor": "#301817",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549799590/mcfrench/tditdz80xgud2x1tggxj.jpg",
+    "aspectRatio": 0.75,
+    "exif": {
+      "ExposureTime": "1/17",
+      "ApertureValue": "2.2",
+      "ISO": "2000"
+    }
+  },
+  {
+    "birthTime": "2018-11-18T13:52:55.924Z",
+    "dominantColor": "#151E2E",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549799606/mcfrench/x5l5lvl9mhhlujw8cjhz.jpg",
+    "aspectRatio": 0.75,
+    "exif": {
+      "ExposureTime": "1/280",
+      "ApertureValue": "2.2",
+      "ISO": "25"
+    }
+  },
+  {
+    "birthTime": "2018-11-20T22:25:28.340Z",
+    "dominantColor": "#CDB8A2",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549799613/mcfrench/jr9dbtgzmzw6us7lsadv.jpg",
+    "aspectRatio": 0.75,
+    "exif": {
+      "ExposureTime": "1/17",
+      "ApertureValue": "2.2",
+      "ISO": "250"
+    }
+  },
+  {
+    "birthTime": "2018-11-22T17:33:02.356Z",
+    "dominantColor": "#32302C",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549799698/mcfrench/op5cbm5mdobh3evwf0qr.jpg",
+    "aspectRatio": 0.75,
+    "exif": {
+      "ExposureTime": "1/194",
+      "ApertureValue": "2.2",
+      "ISO": "25"
+    }
+  },
+  {
+    "birthTime": "2018-11-24T02:01:09.546Z",
+    "dominantColor": "#363230",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549799706/mcfrench/x2k0y5splufauwuhsoyo.jpg",
+    "aspectRatio": 0.75,
+    "exif": {
+      "ExposureTime": "1/17",
+      "ApertureValue": "2.2",
+      "ISO": "640"
+    }
+  },
+  {
+    "birthTime": "2018-11-24T01:49:51.441Z",
+    "dominantColor": "#843B19",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549799722/mcfrench/o439w7ruvdnlqsb6val3.jpg",
+    "aspectRatio": 0.75,
+    "exif": {
+      "ExposureTime": "1/17",
+      "ApertureValue": "2.2",
+      "ISO": "200"
+    }
+  },
+  {
+    "birthTime": "2018-11-25T11:00:14.468Z",
+    "dominantColor": "#DBDFE5",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549799727/mcfrench/hmujdcazs5mauj4g8gbu.jpg",
+    "aspectRatio": 1,
+    "exif": {
+      "ExposureTime": "1/33",
+      "ApertureValue": "2.2",
+      "ISO": "25"
+    }
+  },
+  {
+    "birthTime": "2018-11-25T11:00:57.871Z",
+    "dominantColor": "#156B69",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549799736/mcfrench/agsarfulnsowb8s8ayil.jpg",
+    "aspectRatio": 0.75,
+    "exif": {
+      "ExposureTime": "1/17",
+      "ApertureValue": "2.2",
+      "ISO": "320"
+    }
+  },
+  {
+    "birthTime": "2018-11-25T11:00:14.220Z",
+    "dominantColor": "#EAE2D7",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549801537/mcfrench/ppx8d1wychsfjymrt5lb.jpg",
+    "aspectRatio": 0.75,
+    "exif": {
+      "ExposureTime": "1/33",
+      "ApertureValue": "2.2",
+      "ISO": "32"
+    }
+  },
+  {
+    "birthTime": "2018-11-25T11:00:14.220Z",
+    "dominantColor": "#904610",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549801550/mcfrench/ekk61lq7pkvc4vmrhmwk.jpg",
+    "aspectRatio": 0.75,
+    "exif": {
+      "ExposureTime": "1/17",
+      "ApertureValue": "2.2",
+      "ISO": "800"
+    }
+  },
+  {
+    "birthTime": "2018-11-25T11:01:33.282Z",
+    "dominantColor": "#321E16",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549801563/mcfrench/bv3r7cqwngqbgutqc1s0.jpg",
+    "aspectRatio": 0.75,
+    "exif": {
+      "ExposureTime": "1/17",
+      "ApertureValue": "2.2",
+      "ISO": "1000"
+    }
+  },
+  {
+    "birthTime": "2018-11-25T15:07:05.029Z",
+    "dominantColor": "#E0A55C",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549801577/mcfrench/cd4vjjpup3fwyji9m2hh.jpg",
+    "aspectRatio": 0.75,
+    "exif": {
+      "ExposureTime": "1/17",
+      "ApertureValue": "2.2",
+      "ISO": "320"
+    }
+  },
+  {
+    "birthTime": "2018-11-26T21:33:51.766Z",
+    "dominantColor": "#151724",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549801583/mcfrench/gkvox6rw1uyoy01ful8x.jpg",
+    "aspectRatio": 1.778,
+    "exif": {
+      "ExposureTime": "1/60",
+      "ApertureValue": "2.0",
+      "ISO": "1250"
+    }
+  },
+  {
+    "birthTime": "2018-11-26T21:34:00.127Z",
+    "dominantColor": "#7D7E87",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549801588/mcfrench/zqlmworsvgnn673cd3jp.jpg",
+    "aspectRatio": 1.778,
+    "exif": {
+      "ExposureTime": "1/60",
+      "ApertureValue": "3.2",
+      "ISO": "500"
+    }
+  },
+  {
+    "birthTime": "2018-11-26T21:34:00.129Z",
+    "dominantColor": "#8C4E4F",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549801594/mcfrench/mebgtk68r5ahggzt9rzu.jpg",
+    "aspectRatio": 1.778,
+    "exif": {
+      "ExposureTime": "1/60",
+      "ApertureValue": "3.2",
+      "ISO": "400"
+    }
+  },
+  {
+    "birthTime": "2018-11-26T21:34:00.127Z",
+    "dominantColor": "#1F0C05",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549801598/mcfrench/qg9njot3vl4vtmgul7c4.jpg",
+    "aspectRatio": 1.778,
+    "exif": {
+      "ExposureTime": "1/60",
+      "ApertureValue": "2.0",
+      "ISO": "2000"
+    }
+  },
+  {
+    "birthTime": "2018-11-26T21:34:00.126Z",
+    "dominantColor": "#756F6E",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549801602/mcfrench/cv3n2skpx956plo8pugg.jpg",
+    "aspectRatio": 1.778,
+    "exif": {
+      "ExposureTime": "1/42",
+      "ApertureValue": "2.0",
+      "ISO": "3200"
+    }
+  },
+  {
+    "birthTime": "2018-11-29T20:19:23.360Z",
+    "dominantColor": "#CCB8A6",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549801612/mcfrench/jorfhomo2fccto5prerc.jpg",
+    "aspectRatio": 0.75,
+    "exif": {
+      "ExposureTime": "1/33",
+      "ApertureValue": "2.2",
+      "ISO": "200"
+    }
+  },
+  {
+    "birthTime": "2018-11-29T20:19:23.361Z",
+    "dominantColor": "#E39416",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549801619/mcfrench/w8mkgutzlmwpqp9wcctc.jpg",
+    "aspectRatio": 0.75,
+    "exif": {
+      "ExposureTime": "1/33",
+      "ApertureValue": "2.2",
+      "ISO": "200"
+    }
+  },
+  {
+    "birthTime": "2018-12-05T09:08:07.224Z",
+    "dominantColor": "#7E6154",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549801628/mcfrench/ygif3jzeze2815v8vw6f.jpg",
+    "aspectRatio": 0.75,
+    "exif": {
+      "ExposureTime": "1/33",
+      "ApertureValue": "2.2",
+      "ISO": "25"
+    }
+  },
+  {
+    "birthTime": "2018-12-05T09:08:07.225Z",
+    "dominantColor": "#403A35",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549801638/mcfrench/yxksw7p8oo4a6vbjmc4c.jpg",
+    "aspectRatio": 0.75,
+    "exif": {
+      "ExposureTime": "1/127",
+      "ApertureValue": "2.2",
+      "ISO": "25"
+    }
+  },
+  {
+    "birthTime": "2018-12-05T09:08:06.975Z",
+    "dominantColor": "#D5C8C1",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549801646/mcfrench/ivgqphc5dqpbzsbedun5.jpg",
+    "aspectRatio": 0.75,
+    "exif": {
+      "ExposureTime": "1/33",
+      "ApertureValue": "2.2",
+      "ISO": "64"
+    }
+  },
+  {
+    "birthTime": "2018-12-07T08:52:29.963Z",
+    "dominantColor": "#292522",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549801654/mcfrench/ru326vpf1qgpfxpu6ne5.jpg",
+    "aspectRatio": 0.75,
+    "exif": {
+      "ExposureTime": "1/20",
+      "ApertureValue": "2.2",
+      "ISO": "200"
+    }
+  },
+  {
+    "birthTime": "2018-12-08T17:12:18.840Z",
+    "dominantColor": "#777066",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549801675/mcfrench/ezdmd7ixpcb99wefroak.jpg",
+    "aspectRatio": 1.333,
+    "exif": {
+      "ExposureTime": "1/33",
+      "ApertureValue": "2.2",
+      "ISO": "32"
+    }
+  },
+  {
+    "birthTime": "2018-12-08T17:11:45.723Z",
+    "dominantColor": "#8E8882",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549801688/mcfrench/jumvrdvs9zijmq8ljkqf.jpg",
+    "aspectRatio": 1.333,
+    "exif": {
+      "ExposureTime": "1/100",
+      "ApertureValue": "2.2",
+      "ISO": "25"
+    }
+  },
+  {
+    "birthTime": "2018-12-08T17:11:45.440Z",
+    "dominantColor": "#3E4047",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549801697/mcfrench/jjrrvop7i5yb8w9nubkk.jpg",
+    "aspectRatio": 0.75,
+    "exif": {
+      "ExposureTime": "1/33",
+      "ApertureValue": "2.2",
+      "ISO": "32"
+    }
+  },
+  {
+    "birthTime": "2018-12-09T14:46:15.892Z",
+    "dominantColor": "#DFD4CA",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549801704/mcfrench/jknjiqoqnki8nqqm4vy0.jpg",
+    "aspectRatio": 0.75,
+    "exif": {
+      "ExposureTime": "1/33",
+      "ApertureValue": "2.2",
+      "ISO": "64"
+    }
+  },
+  {
+    "birthTime": "2018-12-09T14:46:16.149Z",
+    "dominantColor": "#686A73",
+    "url": "http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549801715/mcfrench/yfz76eer8zdsyewaveeh.jpg",
+    "aspectRatio": 1.333,
+    "exif": {
+      "ExposureTime": "1/33",
+      "ApertureValue": "2.2",
+      "ISO": "40"
+    }
+  }
+]
