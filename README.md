@@ -31,6 +31,7 @@ cloudinaryFolder="yourfolderincloudinary"
 ```
 
 3. Set the `localImgFolder` and `outputJSONPath` variables accordingly
+1. Install the cloudinary package with `npm i -D cloudinary` or `yarn add -D cloudinary`.
 1. Run `node upload.js`
 
 ## Example usage of Pig
