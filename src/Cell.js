@@ -6,7 +6,7 @@ import getDate from './utils/getDate'
 import styles from './styles.css'
 const thumbnailSize = 10 // Height in px. Keeping it low seeing as it gets blurred anyway with a css filter
 
-const Cell = React.memo(function Cell({ item, containerWidth, gridGap, urlGenerator }) {
+const Cell = React.memo(function Cell({ item, containerWidth, gridGap, getUrl }) {
 
   const [isExpanded, setExpanded] = useState(false)
   const [isThumbnailLoaded, setThumbnailLoaded] = useState(false)
@@ -64,13 +64,13 @@ const Cell = React.memo(function Cell({ item, containerWidth, gridGap, urlGenera
         className={`${styles.pigImg} ${styles.pigThumbnail}${isFullSizeLoaded ? ` ${styles.pigThumbnailLoaded}` : ''}`}
         // display none the thumb if everything we need has loaded
         style={isFullSizeLoaded && isThumbnailLoaded ? { display: 'none' } : null}
-        src={urlGenerator(item.url, thumbnailSize)}
+        src={getUrl(item.url, thumbnailSize)}
         alt=""
         onLoad={() => setThumbnailLoaded(true)}
       />
       <img
         className={`${styles.pigImg} ${styles.pigFull}${isFullSizeLoaded ? ` ${styles.pigFullLoaded}` : ''}`}
-        src={urlGenerator(item.url, getImageHeight(containerWidth))}
+        src={getUrl(item.url, getImageHeight(containerWidth))}
         alt=""
         onLoad={() => setFullSizeLoaded(true)}
       />
@@ -80,7 +80,7 @@ const Cell = React.memo(function Cell({ item, containerWidth, gridGap, urlGenera
         // 1000 is arbitrary. It's just a bigger value so a better quality image.
         <img
           className={styles.pigImg}
-          src={urlGenerator(item.url, 1000)}
+          src={getUrl(item.url, 1000)}
           alt=""
         />
       )}

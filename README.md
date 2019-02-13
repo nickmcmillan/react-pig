@@ -48,14 +48,21 @@ class App extends Component {
       <Pig
         imageData={imageData}
         gridGap={10}
-        urlGenerator={(url, pxHeight) => {
-          // Pig calls this function every time it needs to fetch an image,
-          // providing its required image height in pixels.
-          // This gives you flexibility to define what the url looks like
-          // to suit the url scheme of your image hosting provider
+        getUrl={(url, pxHeight) => {
+          // Pig calls this function every time it needs to fetch an image.
+          // The `url` arg will be provided as is from imageData
+          // Assuming the imageData was generated using `upload.js`, the url string will contain {{HEIGHT}}
+          // The purpose of this function is to replace {{HEIGHT}} value with a dynamic value (which is passed in with `pxHeight`)
+
+          // Eg this:
+          // http://res.cloudinary.com/cloudinaryusername/image/upload/h_{{HEIGHT}}/v12345678/cloudinaryfolder/image.jpg
+          // Becomes this:
+          // http://res.cloudinary.com/cloudinaryusername/image/upload/h_800/v12345678/cloudinaryfolder/image.jpg
           
-          // http://res.cloudinary.com/cloudinaryusername/image/upload/h_{{HEIGHT}}/v1234567890/cloudinaryfolder/imagefilename.jpg
-          return url.replace('{{HEIGHT}}', pxHeight)
+          // This gives you flexibility to define what the url looks like in case you're using something other than Cloudinary.
+
+          // getUrl is optional.
+          // If you omit this prop completely, Pig will do exactly this;
         }}
       />
     )

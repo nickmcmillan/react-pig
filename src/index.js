@@ -3,6 +3,7 @@ import getMinAspectRatio from './utils/getMinAspectRatio'
 import throttle from 'lodash.throttle'
 import debounce from 'lodash.debounce'
 import Cell from './Cell'
+import getUrl from './utils/getUrl'
 
 import styles from './styles.css'
 
@@ -11,7 +12,9 @@ export default class Pig extends React.Component {
     super(props)
 
     if (!props.imageData) throw new Error('imageData is missing')
-    if (!props.urlGenerator) throw new Error('urlGenerator is missing')
+
+    // if getUrl has been provided as a prop, use it. otherwise use the default getUrl from /utils
+    this.getUrl = props.getUrl || getUrl
 
     // sort newest to old, by birthTime
     const sortedByDate = props.imageData.sort((a, b) => new Date(b.birthTime) - new Date(a.birthTime))
@@ -255,7 +258,7 @@ export default class Pig extends React.Component {
             item={item}
             containerWidth={this.container.offsetWidth}
             gridGap={this.settings.gridGap}
-            urlGenerator={this.props.urlGenerator}
+            getUrl={this.getUrl}
           />
         ))}
       </div>
