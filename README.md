@@ -2,6 +2,8 @@
 
 > Arrange images in a responsive, progressive-loading grid managed in JavaScript using CSS transforms.
 
+[View Demo](https://pigreact.netlify.com/)
+
 [![NPM](https://img.shields.io/npm/v/pig-react.svg)](https://www.npmjs.com/package/pig-react) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 
