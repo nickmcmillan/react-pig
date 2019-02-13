@@ -45,8 +45,8 @@ class App extends Component {
   render() {
     return (
       <Pig
-        imageData={imageData}
-        gridGap={10}
+        imageData={imageData} // Array. Required.
+        gridGap={10} // Integer. Optional. Defaults to 8
         getUrl={(url, pxHeight) => {
           // Pig calls this function every time it needs to fetch an image.
           // The `url` arg will be provided as is from imageData
