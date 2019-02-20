@@ -1,4 +1,6 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+
 import getMinAspectRatio from './utils/getMinAspectRatio'
 import throttle from 'lodash.throttle'
 import debounce from 'lodash.debounce'
@@ -66,7 +68,6 @@ export default class Pig extends React.Component {
        */
       secondaryImageBufferHeight: props.secondaryImageBufferHeight || 1500,
     }
-
   }
 
   doLayout() {
@@ -264,4 +265,12 @@ export default class Pig extends React.Component {
       </div>
     )
   }
+}
+
+Pig.propTypes = {
+  imageData: PropTypes.array.isRequired,
+  gridGap: PropTypes.number,
+  getUrl: PropTypes.func,
+  primaryImageBufferHeight: PropTypes.number,
+  secondaryImageBufferHeight: PropTypes.number,
 }

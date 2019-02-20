@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 import { useSpring, animated } from 'react-spring'
 import getImageHeight from './utils/getImageHeight'
 import getDate from './utils/getDate'
@@ -87,16 +88,16 @@ const Cell = React.memo(function Cell({ item, containerWidth, gridGap, getUrl })
 
       <figcaption className={styles.caption}>
         <span>{getDate(item.birthTime)}</span>
-        {/* {item.exif.ISO &&
-          <ul className="exif">
-            <li>Exp {item.exif.ExposureTime}</li>
-            <li><em>f</em> {item.exif.ApertureValue}</li>
-            <li>ISO {item.exif.ISO}</li>
-          </ul>
-        } */}
       </figcaption>
     </animated.button>
   )
 })
 
 export default Cell
+
+Cell.propTypes = {
+  item: PropTypes.object.isRequired, // TODO: object shape
+  containerWidth: PropTypes.number,
+  gridGap: PropTypes.number,
+  getUrl: PropTypes.func,
+}

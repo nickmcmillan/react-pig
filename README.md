@@ -76,10 +76,10 @@ export default App
 
 
 ## Todo: 
-- [x] Convert this package into a module
 - [ ] Use resize observer
 - [ ] Group by months
-- [ ] Proptype checks
+- [x] Convert this package into a module
+- [x] Proptype checks
 
 This React library was packaged with https://github.com/transitive-bullshit/create-react-library
 
