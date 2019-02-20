@@ -5,6 +5,9 @@ const cloudinary = require('cloudinary')
 const fs = require('fs')
 const ColorThief = require('color-thief-jimp')
 const Jimp = require('jimp')
+const _cliProgress = require('cli-progress');
+
+
 
 const outputJSONFileName = argv.out || 'output.json'
 const cloudinaryFolder = argv.cloudfolder || ''
@@ -69,12 +72,20 @@ const getDominantColor = url => new Promise(async (resolve, reject) => {
   })
 })
 
+
 ;(async () => {
   const cloudAssetsArr = await getCloudinaryFolder()
   const outputArr = []
+  
+  const progressBar = new _cliProgress.Bar({}, _cliProgress.Presets.shades_classic)
+  let progressBarVal = 0
+  console.log('📷  Generating JSON')
+  progressBar.start(cloudAssetsArr.length, progressBarVal)
 
   for (const img of cloudAssetsArr) {
-    console.log('📷  ', img.public_id)
+    progressBarVal += 1
+    progressBar.update(progressBarVal)
+
 
     // Cloudinary doesn't provide dominant colors when using the resources API
     // only when using the resource API.
@@ -106,6 +117,8 @@ const getDominantColor = url => new Promise(async (resolve, reject) => {
       aspectRatio: parseFloat((width / height).toFixed(3), 10), // limit to 3 decimal places
     })
   }
+
+  progressBar.stop()
 
   fs.writeFile(outputJSONFileName, JSON.stringify(outputArr), 'utf8', () => {
     console.log(`🎉  Done! Generated JSON file: ${outputJSONFileName}`)
