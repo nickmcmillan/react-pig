@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import ResizeObserver from 'react-resize-observer'
 
-import getMinAspectRatio from './utils/getMinAspectRatio'
 import Cell from './Cell'
 import doLayout from './doLayout'
 import computeLayout from './computeLayout'
@@ -74,10 +73,11 @@ export default class Pig extends React.Component {
   setRenderedItems() {
     if (!this.container) return
 
+    // Set the container height
+    this.container.style.height = this.totalHeight + 'px'
+
     const renderedItems = doLayout({
-      container: this.container,
       containerOffset: this.containerOffset,
-      totalHeight: this.totalHeight,
       scrollDirection: this.scrollDirection,
       settings: this.settings,
       latestYOffset: this.latestYOffset,
@@ -100,101 +100,24 @@ export default class Pig extends React.Component {
     })
   }
 
-  /**
-   * This computes the layout of the entire grid, setting the height, width,
-   * translateX, translateY, and transtion values for each ProgessiveImage in
-   * `this.props.imageData`. These styles are set on the ProgressiveImage.style property,
-   * but are not set on the DOM.
-   *
-   * This separation of concerns (computing layout and DOM manipulation) is
-   * paramount to the performance of the PIG. While we need to manipulate the
-   * DOM every time we scroll (adding or remove images, etc.), we only need to
-   * compute the layout of the PIG on load and on resize. Therefore, this
-   * function will compute the entire grid layout but will not manipulate the
-   * DOM at all.
-   *
-   * All DOM manipulation occurs in `doLayout`.
-   */
-  computeLayout(wrapperWidth) {
-    // Runs once or on resize
-    // Compute the minimum aspect ratio that should be applied to the rows.
-    this.minAspectRatio = getMinAspectRatio(wrapperWidth)
-
-    // State
-    let row = []           // The list of images in the current row.
-    let translateX = 0     // The current translateX value that we are at
-    let translateY = 0     // The current translateY value that we are at
-    let rowAspectRatio = 0 // The aspect ratio of the row we are building
-
-    // Loop through all our images, building them up into rows and computing
-    // the working rowAspectRatio.
-    const tempImgData = []
-    this.state.imageData.forEach((image, index) => {
-      row.push(image)
-
-      // When the rowAspectRatio exceeeds the minimum acceptable aspect ratio,
-      // or when we're out of images, we say that we have all the images we
-      // need for this row, and compute the style values for each of these
-      // images.
-      rowAspectRatio += parseFloat(image.aspectRatio)
-      if (rowAspectRatio >= this.minAspectRatio || index + 1 === this.state.imageData.length) {
-
-        // Compute this row's height.
-        let totalDesiredWidthOfImages = wrapperWidth - this.settings.gridGap * (row.length - 1)
-        let rowHeight = totalDesiredWidthOfImages / rowAspectRatio
-
-        // Handles cases where we don't have enough images to fill a row
-        if (rowAspectRatio < this.minAspectRatio) {
-          rowHeight = totalDesiredWidthOfImages / this.minAspectRatio
-        }
-
-        // For each image in the row, compute the width, height, translateX,
-        // and translateY values, and set them (and the transition value we
-        // found above) on each image.
-        //
-        // NOTE: This does not manipulate the DOM, rather it just sets the
-        //       style values on the ProgressiveImage instance. The DOM nodes
-        //       will be updated in doLayout.       
-
-        row.forEach((img) => {
-
-          const imageWidth = rowHeight * img.aspectRatio
-
-          tempImgData.push({
-            ...img,
-            style: {
-              width: parseInt(imageWidth, 10),
-              height: parseInt(rowHeight, 10),
-              translateX: translateX,
-              translateY: translateY,
-            }
-          })
-
-          // The next image is this.settings.gridGap pixels to the
-          // right of this image.
-          translateX += imageWidth + this.settings.gridGap
-
-        })
-
-        // Reset our state variables for next row.
-        row = []
-        rowAspectRatio = 0
-        translateY += parseInt(rowHeight, 10) + this.settings.gridGap
-        translateX = 0
-      }
+  handleComputeLayout(wrapperWidth) {
+    const {
+      imageData,
+      newTotalHeight
+    } = computeLayout({
+      wrapperWidth,
+      minAspectRatio: this.minAspectRatio,
+      imageData: this.state.imageData,
+      settings: this.settings,
     })
 
-    this.setState({
-      imageData: tempImgData
-    })
-    // No space below the last image
-    this.totalHeight = translateY - this.settings.gridGap
+    this.totalHeight = newTotalHeight
+    this.setState({ imageData })
   }
 
   componentDidMount() {
     this.container = this.containerRef.current
     this.containerOffset = this.container.offsetTop
-    this.computeLayout(this.container.offsetWidth)
   }
 
   render() {
@@ -208,7 +131,7 @@ export default class Pig extends React.Component {
       >
         <ResizeObserver
           onResize={rect => {
-            this.computeLayout(rect.width)
+            this.handleComputeLayout(rect.width)
             this.setRenderedItems()
           }}
           onPosition={rect => this.onScroll(rect.top)}
