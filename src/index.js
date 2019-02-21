@@ -4,6 +4,8 @@ import ResizeObserver from 'react-resize-observer'
 
 import getMinAspectRatio from './utils/getMinAspectRatio'
 import Cell from './Cell'
+import doLayout from './doLayout'
+import computeLayout from './computeLayout'
 import getUrl from './utils/getUrl'
 
 import styles from './styles.css'
@@ -69,46 +71,17 @@ export default class Pig extends React.Component {
     }
   }
 
-  doLayout() {
+  setRenderedItems() {
     if (!this.container) return
 
-    // Set the container height
-    this.container.style.height = this.totalHeight + 'px'
-
-    // Get the top and bottom buffers heights.
-    const bufferTop =
-      (this.scrollDirection === 'up') ?
-        this.settings.primaryImageBufferHeight :
-        this.settings.secondaryImageBufferHeight
-    const bufferBottom =
-      (this.scrollDirection === 'down') ?
-        this.settings.secondaryImageBufferHeight :
-        this.settings.primaryImageBufferHeight
-
-    // Now we compute the location of the top and bottom buffers:
-    // const containerOffset = getOffsetTop(this.container)
-    const windowHeight = window.innerHeight
-
-    // This is the top of the top buffer. If the bottom of an image is above
-    // this line, it will be removed.
-    const minTranslateYPlusHeight = this.latestYOffset - this.containerOffset - bufferTop
-
-    // This is the bottom of the bottom buffer.  If the top of an image is
-    // below this line, it will be removed.
-    const maxTranslateY = this.latestYOffset + windowHeight + bufferBottom
-
-
-    // Here, we loop over every image, determine if it is inside our buffers or
-    // no, and either insert it or remove it appropriately.
-
-    const renderedItems = this.state.imageData.filter(img => {
-      if (img.style.translateX === null || img.style.translateY === null) return false
-
-      if (img.style.translateY + img.style.height < minTranslateYPlusHeight || img.style.translateY > maxTranslateY) {
-        return false
-      } else {
-        return true
-      }
+    const renderedItems = doLayout({
+      container: this.container,
+      containerOffset: this.containerOffset,
+      totalHeight: this.totalHeight,
+      scrollDirection: this.scrollDirection,
+      settings: this.settings,
+      latestYOffset: this.latestYOffset,
+      imageData: this.state.imageData
     })
 
     this.setState({ renderedItems })
@@ -121,9 +94,9 @@ export default class Pig extends React.Component {
     this.latestYOffset = newYOffset
     this.scrollDirection = (this.latestYOffset > this.previousYOffset) ? 'down' : 'up'
 
-    // Call this.doLayout, guarded by window.requestAnimationFrame
+    // Call this.setRenderedItems, guarded by window.requestAnimationFrame
     window.requestAnimationFrame(() => {
-      this.doLayout()
+      this.setRenderedItems()
     })
   }
 
@@ -236,7 +209,7 @@ export default class Pig extends React.Component {
         <ResizeObserver
           onResize={rect => {
             this.computeLayout(rect.width)
-            this.doLayout()
+            this.setRenderedItems()
           }}
           onPosition={rect => this.onScroll(rect.top)}
         />
