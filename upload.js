@@ -4,7 +4,9 @@ require('dotenv').config()
 const argv = require('minimist')(process.argv.slice(2))
 const cloudinary = require('cloudinary')
 const fs = require('fs')
+const _cliProgress = require('cli-progress')
 
+// node upload.js --in=./imgs/ --out=./imageData.json --cloudfolder=whatever
 const localImgFolder = argv.in
 const outputJSONFileName = argv.out
 const cloudinaryFolder = argv.cloudfolder || ''
@@ -22,7 +24,7 @@ cloudinary.config({ cloud_name, api_key, api_secret })
 
 const uploadToCloudinary = (fileName, birthTime) => new Promise(async (resolve, reject) => {
   const imgPath = `${localImgFolder}${fileName}`
-  console.log('📷  Uploading', imgPath)
+  // console.log('📷  Uploading', imgPath)
 
   try {
     await cloudinary.v2.uploader.upload(imgPath, {
@@ -74,12 +76,17 @@ fs.readdir(localImgFolder, async (err, files) => {
   })
 
   console.log('🐕 ', filteredFiles.length, 'images found')
+  const progressBar = new _cliProgress.Bar({}, _cliProgress.Presets.shades_classic)
+  let progressBarVal = 0
+  progressBar.start(filteredFiles.length, progressBarVal)
 
   const output = []
   const failedImgs = []
 
   // loop through each image found
   for (const file of filteredFiles) {
+    progressBarVal += 1
+    progressBar.update(progressBarVal)
     // cloudinary doesnt store birthTime data, but we need this. Its useful to know when an image was created.
     const { size, birthtime: birthTime } = await getFileData(localImgFolder + file)
 
@@ -122,9 +129,9 @@ fs.readdir(localImgFolder, async (err, files) => {
       const url = `http://res.cloudinary.com/${cloud_name}/image/upload/h_{{HEIGHT}}/v${version}/${public_id}.${format}`
 
       const fileData = {
-        id: public_id,
+        id: public_id.split('/')[1],
         birthTime,
-        author,
+        // author,
         dominantColor: uploadedFileData.colors[0][0],
         url,
         aspectRatio: parseFloat((width / height).toFixed(3), 10), // limit to 3 decimal places
@@ -145,6 +152,8 @@ fs.readdir(localImgFolder, async (err, files) => {
       continue
     }
   }
+
+  progressBar.stop()
 
   fs.writeFile(outputJSONFileName, JSON.stringify(output), 'utf8', () => {
     console.log('🎉  Done! Generated JSON file', outputJSONFileName)
