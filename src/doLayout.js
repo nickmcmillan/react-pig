@@ -1,27 +1,13 @@
 export default function ({
-  container,
   containerOffsetTop,
-  totalHeight,
   scrollDirection,
   settings,
   latestYOffset,
   imageData,
 }) {
-
-  if (!container) return
-
-  // Set the container height
-  container.style.height = totalHeight + 'px'
-
-  // Get the top and bottom buffers heights.
-  const bufferTop =
-    (scrollDirection === 'up') ?
-      settings.primaryImageBufferHeight :
-      settings.secondaryImageBufferHeight
-  const bufferBottom =
-    (scrollDirection === 'down') ?
-      settings.secondaryImageBufferHeight :
-      settings.primaryImageBufferHeight
+  // Get the top and bottom buffers heights
+  const bufferTop = (scrollDirection === 'up') ? settings.primaryImageBufferHeight : settings.secondaryImageBufferHeight
+  const bufferBottom = (scrollDirection === 'down') ? settings.secondaryImageBufferHeight : settings.primaryImageBufferHeight
 
   // Now we compute the location of the top and bottom buffers:
   const windowHeight = window.innerHeight
