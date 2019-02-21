@@ -10,7 +10,6 @@ const thumbnailSize = 10 // Height in px. Keeping it low seeing as it gets blurr
 const Cell = React.memo(function Cell({ item, containerWidth, gridGap, getUrl }) {
 
   const [isExpanded, setExpanded] = useState(false)
-  const [isThumbnailLoaded, setThumbnailLoaded] = useState(false)
   const [isFullSizeLoaded, setFullSizeLoaded] = useState(false)
 
   // When expanded, portrait and Landscape images are treated differently
@@ -65,7 +64,6 @@ const Cell = React.memo(function Cell({ item, containerWidth, gridGap, getUrl })
         className={`${styles.pigImg} ${styles.pigThumbnail}${isFullSizeLoaded ? ` ${styles.pigThumbnailLoaded}` : ''}`}
         src={getUrl(item.url, thumbnailSize)}
         alt=""
-        onLoad={() => setThumbnailLoaded(true)}
       />
       <img
         className={`${styles.pigImg} ${styles.pigFull}${isFullSizeLoaded ? ` ${styles.pigFullLoaded}` : ''}`}
