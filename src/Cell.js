@@ -63,8 +63,6 @@ const Cell = React.memo(function Cell({ item, containerWidth, gridGap, getUrl })
 
       <img
         className={`${styles.pigImg} ${styles.pigThumbnail}${isFullSizeLoaded ? ` ${styles.pigThumbnailLoaded}` : ''}`}
-        // display none the thumb if everything we need has loaded
-        style={isFullSizeLoaded && isThumbnailLoaded ? { display: 'none' } : null}
         src={getUrl(item.url, thumbnailSize)}
         alt=""
         onLoad={() => setThumbnailLoaded(true)}
