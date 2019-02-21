@@ -76,8 +76,8 @@ export default App
 
 
 ## Todo: 
-- [ ] Use resize observer
 - [ ] Group by months
+- [x] Use resize observer instead of scroll/resize listeners
 - [x] Convert this package into a module
 - [x] Proptype checks
 

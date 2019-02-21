@@ -27,8 +27,7 @@
     "react-dom": "16.8.1"
   },
   "dependencies": {
-    "lodash.debounce": "^4.0.8",
-    "lodash.throttle": "^4.1.1",
+    "react-resize-observer": "^1.1.1",
     "react-spring": "^8.0.5"
   },
   "devDependencies": {

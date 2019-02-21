@@ -1,9 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import ResizeObserver from 'react-resize-observer'
 
 import getMinAspectRatio from './utils/getMinAspectRatio'
-import throttle from 'lodash.throttle'
-import debounce from 'lodash.debounce'
 import Cell from './Cell'
 import getUrl from './utils/getUrl'
 
@@ -71,6 +70,7 @@ export default class Pig extends React.Component {
   }
 
   doLayout() {
+    if (!this.container) return
 
     // Set the container height
     this.container.style.height = this.totalHeight + 'px'
@@ -114,9 +114,9 @@ export default class Pig extends React.Component {
     this.setState({ renderedItems })
   }
 
-  onScroll = () => {
+  onScroll = (yOffset) => {
     // Compute the scroll direction using the latestYOffset and the previousYOffset
-    const newYOffset = window.pageYOffset
+    const newYOffset = -(yOffset - this.settings.gridGap)
     this.previousYOffset = this.latestYOffset || newYOffset
     this.latestYOffset = newYOffset
     this.scrollDirection = (this.latestYOffset > this.previousYOffset) ? 'down' : 'up'
@@ -142,13 +142,8 @@ export default class Pig extends React.Component {
    *
    * All DOM manipulation occurs in `doLayout`.
    */
-  computeLayout() {
-    // runs once
-    // or on resize
-    // TODO: this.container should use resizeObserver inside of window.resize event
-
-    const wrapperWidth = this.container.offsetWidth
-
+  computeLayout(wrapperWidth) {
+    // Runs once or on resize
     // Compute the minimum aspect ratio that should be applied to the rows.
     this.minAspectRatio = getMinAspectRatio(wrapperWidth)
 
@@ -223,25 +218,10 @@ export default class Pig extends React.Component {
     this.totalHeight = translateY - this.settings.gridGap
   }
 
-  onResize = () => {
-    this.computeLayout()
-    this.doLayout()
-  }
-
   componentDidMount() {
     this.container = this.containerRef.current
-
     this.containerOffset = this.container.offsetTop
-
-    this.computeLayout()
-    this.onScroll()
-
-    window.addEventListener('scroll', throttle(this.onScroll, 50))
-    window.addEventListener('resize', debounce(this.onResize, 800))
-  }
-
-  componentWillUnmount() {
-    // TODO:
+    this.computeLayout(this.container.offsetWidth)
   }
 
   render() {
@@ -253,6 +233,13 @@ export default class Pig extends React.Component {
           margin: `${this.settings.gridGap}px`
         }}
       >
+        <ResizeObserver
+          onResize={rect => {
+            this.computeLayout(rect.width)
+            this.doLayout()
+          }}
+          onPosition={rect => this.onScroll(rect.top)}
+        />
         {this.state.renderedItems.map(item => (
           <Cell
             key={item.url}
