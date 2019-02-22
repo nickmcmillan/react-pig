@@ -23,6 +23,8 @@ export default class Pig extends React.Component {
     // if getUrl has been provided as a prop, use it. otherwise use the default getUrl from /utils
     this.getUrl = props.getUrl || getUrl
 
+    // if sortFunc has been provided as a prop, use it, otherwise sort newest to old, by birthTime
+    const sortedByDate = props.imageData.sort(props.sortFunc || this.sortImages)
     this.imageData = props.imageData
     // do sorting
     if (props.sortByDate) this.imageData = sortByDate(this.imageData)
@@ -97,6 +99,8 @@ export default class Pig extends React.Component {
     })
   }
 
+  sortImages = (a, b) => new Date(b.birthTime) - new Date(a.birthTime)
+
   onResize = () => {
     this.imageData = this.getUpdatedImageLayout()
     this.setRenderedItems(this.imageData)
@@ -120,7 +124,7 @@ export default class Pig extends React.Component {
         imageData: this.imageData,
         settings: this.settings,
       })
-  
+
       this.totalHeight = newTotalHeight
       return imageData
     } else {
@@ -149,7 +153,7 @@ export default class Pig extends React.Component {
     this.imageData = this.getUpdatedImageLayout()
     this.setRenderedItems(this.imageData)
   }
-  
+
   componentWillUnmount() {
     window.removeEventListener('scroll', this.throttledScroll)
     window.removeEventListener('resize', this.debouncedResize)
@@ -170,7 +174,7 @@ export default class Pig extends React.Component {
           this.setState({ activeCellUrl: null })
           return
         }
-        
+
         this.setState({
           // if cell is already active, deactivate it
           activeCellUrl: item.url !== this.state.activeCellUrl ? item.url : null
@@ -178,6 +182,8 @@ export default class Pig extends React.Component {
       }}
       activeCellUrl={this.state.activeCellUrl}
       settings={this.settings}
+      expandedSize={this.props.expandedSize}
+      thumbnailSize={this.props.thumbnailSize}
     />
   )
 
@@ -216,4 +222,7 @@ Pig.propTypes = {
   groupGapSm: PropTypes.number,
   groupGapLg: PropTypes.number,
   breakpoint: PropTypes.number,
+  sortFunc: PropTypes.func,
+  expandedSize: PropTypes.number,
+  thumbnailSize: PropTypes.number
 }

@@ -4,8 +4,7 @@ import { useSpring, animated } from 'react-spring'
 import getImageHeight from './utils/getImageHeight'
 import getCellMeasurements from './utils/getCellMeasurements'
 import styles from './styles.css'
-
-const thumbnailSize = 10 // Height in px. Keeping it low seeing as it gets blurred anyway with a css filter
+const defaultThumbnailSize = 10 // Height in px. Keeping it low seeing as it gets blurred anyway with a css filter
 
 const Cell = React.memo(function Cell({
   item,
@@ -15,7 +14,11 @@ const Cell = React.memo(function Cell({
   activeCellUrl,
   handleClick,
   windowHeight,
-  settings
+  settings,
+                                        gridGap,
+                                        expandedSize,
+                                        thumbnailSize,
+                                        expandedSize
 }) {
 
   const isExpanded = activeCellUrl === item.url
@@ -52,7 +55,7 @@ const Cell = React.memo(function Cell({
     >
       <img
         className={`${styles.pigImg} ${styles.pigThumbnail}${isFullSizeLoaded ? ` ${styles.pigThumbnailLoaded}` : ''}`}
-        src={getUrl(item.url, thumbnailSize)}
+        src={getUrl(item.url, thumbnailSize || defaultThumbnailSize)}
         alt=""
       />
       <img
@@ -65,7 +68,7 @@ const Cell = React.memo(function Cell({
       {isExpanded && (
         <img
           className={styles.pigImg}
-          src={getUrl(item.url, 1200)}
+          src={getUrl(item.url, expandedSize || 1000)}
           alt=""
         />
       )}
@@ -80,4 +83,6 @@ Cell.propTypes = {
   containerWidth: PropTypes.number,
   settings: PropTypes.object.isRequired,
   getUrl: PropTypes.func,
+  expandedSize: PropTypes.number,
+  thumbnailSize: PropTypes.number
 }
