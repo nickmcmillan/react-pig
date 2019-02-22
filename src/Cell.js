@@ -9,24 +9,43 @@ const thumbnailSize = 10 // Height in px. Keeping it low seeing as it gets blurr
 
 const Cell = React.memo(function Cell({ item, containerWidth, gridGap, getUrl, activeCell, handleClick }) {  
 
+  const { innerHeight, scrollY } = window
   const isExpanded = activeCell === item.url
-
   const [isFullSizeLoaded, setFullSizeLoaded] = useState(false)
 
   // When expanded, portrait and Landscape images are treated differently
   const isImgPortrait = item.aspectRatio <= 1
   // Based on the window height, calculate the max image width
-  const widthDerivedFromMaxWindowHeight = (window.innerHeight - gridGap * 2) * item.aspectRatio
-  // 1. If image is portrait and when expanded it is too wide to fit in the container el, return containerWidth (basically like a limiter)
-  // 2. If image is portrait and when expanded it fits within the container el, return widthDerivedFromMaxWindowHeight
-  // 3. If it is not portrait, ie landscape, return containerWidth
-  const calcWidth = isImgPortrait ? widthDerivedFromMaxWindowHeight > containerWidth ? containerWidth : widthDerivedFromMaxWindowHeight : containerWidth
-  // Once all of that is out of the way, calculating the height is easy;
-  const calcHeight = calcWidth / item.aspectRatio
+  const widthDerivedFromMaxWindowHeight = (innerHeight - gridGap * 2) * item.aspectRatio
+  
+  const calcWidth = (() => {
+    if (isImgPortrait) {
+      if (widthDerivedFromMaxWindowHeight > containerWidth) {
+        // 1. If image is portrait and when expanded it is too wide to fit in the container width, 
+        // return containerWidth (basically a limiter)
+        return containerWidth
+      } else {
+        // 2. If image is portrait and when expanded it fits within the container
+        return widthDerivedFromMaxWindowHeight
+      }
+    } else {
+      if ((containerWidth / item.aspectRatio) >= innerHeight) {
+        // 3. If it's landscape, and if its too tall to fit in the viewport height, 
+        // return the widthDerivedFromMaxWindowHeight
+        return widthDerivedFromMaxWindowHeight - gridGap * 2
+      } else {
+        // 4. If it's landscape and when expanded fits within the container, return containerWidth
+        return containerWidth - gridGap * 2
+      }
+    }
+  })()
 
-  // Portrait images need to be centered along the x axis. Landscape images go full width, so just need to translate to 0
-  const offsetX = isImgPortrait ? (containerWidth / 2) - (calcWidth / 2) : 0
-  const offsetY = window.scrollY + (window.innerHeight / 2) - (calcHeight / 2) - gridGap
+  // Once all of that is out of the way, calculating the height is straightforward;
+  const calcHeight = (calcWidth / item.aspectRatio) - gridGap
+
+  // calculate the offset position in the center of the screen
+  const offsetX = (containerWidth / 2) - (calcWidth / 2) 
+  const offsetY = scrollY + (innerHeight / 2) - (calcHeight / 2) - gridGap
 
   // gridPosition is what has been set by the grid layout logic (in the parent component)
   const gridPosition = `translate3d(${item.style.translateX}px, ${item.style.translateY}px, 0)`
@@ -37,8 +56,8 @@ const Cell = React.memo(function Cell({ item, containerWidth, gridGap, getUrl, a
     transform: isExpanded ? screenCenter : gridPosition,
     outlineColor: isExpanded ? 'rgba(255,255,255,1)' : 'rgba(255,255,255,0)',
     zIndex: isExpanded ? 1 : 0,
-    width: isExpanded ? calcWidth + 'px' : item.style.width + 'px',
-    height: isExpanded ? calcHeight + 'px' : item.style.height + 'px',
+    width: isExpanded ? Math.ceil(calcWidth) + 'px' : item.style.width + 'px',
+    height: isExpanded ? Math.ceil(calcHeight) + 'px' : item.style.height + 'px',
     config: { mass: 1.5, tension: 400, friction: 40 }
   })
 
