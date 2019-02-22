@@ -7,9 +7,10 @@ import getDate from './utils/getDate'
 import styles from './styles.css'
 const thumbnailSize = 10 // Height in px. Keeping it low seeing as it gets blurred anyway with a css filter
 
-const Cell = React.memo(function Cell({ item, containerWidth, gridGap, getUrl }) {
+const Cell = React.memo(function Cell({ item, containerWidth, gridGap, getUrl, activeCell, handleClick }) {  
 
-  const [isExpanded, setExpanded] = useState(false)
+  const isExpanded = activeCell === item.url
+
   const [isFullSizeLoaded, setFullSizeLoaded] = useState(false)
 
   // When expanded, portrait and Landscape images are treated differently
@@ -37,17 +38,14 @@ const Cell = React.memo(function Cell({ item, containerWidth, gridGap, getUrl })
     outlineColor: isExpanded ? 'rgba(255,255,255,1)' : 'rgba(255,255,255,0)',
     zIndex: isExpanded ? 1 : 0,
     width: isExpanded ? calcWidth + 'px' : item.style.width + 'px',
-    height: isExpanded ? calcHeight  + 'px' : item.style.height + 'px',
+    height: isExpanded ? calcHeight + 'px' : item.style.height + 'px',
     config: { mass: 1.5, tension: 400, friction: 40 }
   })
 
   return (
     <animated.button
-      onScroll={isExpanded ? () => setExpanded(false) : null}
-      onWheel={isExpanded ? () => setExpanded(false) : null}
-      onTouchMove={isExpanded ? () => setExpanded(false) : null}
       className={`${styles.pigBtn}${isExpanded ? ` ${styles.pigBtnActive}` : ''}`}
-      onClick={() => setExpanded(!isExpanded)}
+      onClick={() => handleClick(item.url)}
       style={{
         outlineStyle: 'solid',
         outlineWidth: `${gridGap}px`,
@@ -77,7 +75,7 @@ const Cell = React.memo(function Cell({ item, containerWidth, gridGap, getUrl })
         // 1000 is arbitrary. It's just a bigger value so a better quality image.
         <img
           className={styles.pigImg}
-          src={getUrl(item.url, 1000)}
+          src={getUrl(item.url, 1200)}
           alt=""
         />
       )}

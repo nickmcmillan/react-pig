@@ -34,6 +34,7 @@ export default class Pig extends React.Component {
     this.state = {
       imageData: imageDataWithDefaults,
       renderedItems: [],
+      activeCell: null
     }
 
     this.containerOffset = null
@@ -94,9 +95,10 @@ export default class Pig extends React.Component {
     this.latestYOffset = newYOffset
     this.scrollDirection = (this.latestYOffset > this.previousYOffset) ? 'down' : 'up'
 
-    // Call this.setRenderedItems, guarded by window.requestAnimationFrame
     window.requestAnimationFrame(() => {
       this.setRenderedItems()
+      // dismiss any active cell
+      if (this.state.activeCell) this.setState({ activeCell: null })
     })
   }
 
@@ -143,6 +145,13 @@ export default class Pig extends React.Component {
             containerWidth={this.container.offsetWidth}
             gridGap={this.settings.gridGap}
             getUrl={this.getUrl}
+            handleClick={activeCell => {
+              this.setState({ 
+                // if cell is already active, deactivate it
+                activeCell: activeCell !== this.state.activeCell ? activeCell : null
+               })
+            }}
+            activeCell={this.state.activeCell}
           />
         ))}
       </div>
