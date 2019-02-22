@@ -31,10 +31,10 @@ api_key="1234567890"
 api_secret="yourapisecret"
 ```
 
-3. Run the file thusly `node upload.js --in=./imgs/ --out=./imageData.json --cloudfolder=whatever`
+3. Run the file thusly `node upload.js --in=./imgs/ --out=./imageData.json --cloudinaryFolder=whatever`
 * `--in` - your local folder where your images are at
 * `--out` - the output JSON file
-* `--cloudfolder` - the folder in Cloudinary (optional)
+* `--cloudinaryFolder` - the folder in Cloudinary (optional)
 
 
 

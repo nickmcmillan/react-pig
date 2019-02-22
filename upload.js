@@ -11,7 +11,6 @@ const recursive = require("recursive-readdir");
 const localImgFolder = argv.in
 const outputJSONFileName = argv.out || './imageData.json'
 const cloudinaryFolder = argv.cloudinaryFolder || ''
-const groupByApplePhotosFolders = argv.groupByApplePhotosFolders || false
 // const author = argv.a || ''
 
 if (!localImgFolder) throw new Error('Missing -in arg')
@@ -70,10 +69,6 @@ const getFileData = fileName => new Promise(async resolve => {
 // read the localImgFolder
 recursive(localImgFolder, async (err, files) => {
   if (err) throw new Error(err)
-
-  if (groupByApplePhotosFolders) {
-    console.log('🗂  Adding dates and locations based on Apple Photos folder structure')
-  }
 
   // we are only interested in the following file formats
   const filteredFiles = files.filter(file => {
