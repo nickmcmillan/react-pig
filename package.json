@@ -1,6 +1,6 @@
 {
   "name": "pig-react",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Arrange images in a responsive, progressive-loading grid managed in JavaScript using CSS transforms.",
   "author": "nickmcmillan",
   "license": "MIT",
@@ -53,6 +53,7 @@
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-scripts": "^1.1.4",
+    "recursive-readdir": "^2.2.2",
     "rollup": "^0.64.1",
     "rollup-plugin-babel": "^3.0.7",
     "rollup-plugin-commonjs": "^9.1.3",
