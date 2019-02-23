@@ -91,6 +91,7 @@ export default class Pig extends React.Component {
   onResize = () => {
     this.imageData = this.getUpdatedImageLayout()
     this.setRenderedItems(this.imageData)
+    this.container.style.height = this.totalHeight + 'px' // set the container height again based on new layout
   }
 
   getUpdatedImageLayout() {
