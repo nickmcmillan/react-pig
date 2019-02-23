@@ -24,10 +24,10 @@ export default class Pig extends React.Component {
     this.getUrl = props.getUrl || getUrl
 
     // if sortFunc has been provided as a prop, use it, otherwise sort newest to old, by birthTime
-    const sortedByDate = props.imageData.sort(props.sortFunc || this.sortImages)
     this.imageData = props.imageData
     // do sorting
-    if (props.sortByDate) this.imageData = sortByDate(this.imageData)
+    if (props.sortFunc) this.imageData.sort(props.sortFunc)
+    else if (props.sortByDate) this.imageData = sortByDate(this.imageData)
 
     // do grouping
     if (props.groupByDate) {
@@ -58,6 +58,8 @@ export default class Pig extends React.Component {
       bgColor: props.bgColor || '#fff',
       primaryImageBufferHeight: props.primaryImageBufferHeight || 2500,
       secondaryImageBufferHeight: props.secondaryImageBufferHeight || 100,
+      expandedSize: props.expandedSize || 1000,
+      thumbnailSize: props.thumbnailSize || 10,
 
       // settings specific to groups
       groupByDate: props.groupByDate || false,
@@ -182,7 +184,6 @@ export default class Pig extends React.Component {
       }}
       activeCellUrl={this.state.activeCellUrl}
       settings={this.settings}
-      expandedSize={this.props.expandedSize}
       thumbnailSize={this.props.thumbnailSize}
     />
   )
@@ -225,5 +226,4 @@ Pig.propTypes = {
   sortFunc: PropTypes.func,
   expandedSize: PropTypes.number,
   thumbnailSize: PropTypes.number,
-  showCaption: PropTypes.bool
 }

@@ -15,10 +15,6 @@ const Cell = React.memo(function Cell({
   handleClick,
   windowHeight,
   settings,
-                                        gridGap,
-                                        expandedSize,
-                                        thumbnailSize,
-                                        expandedSize
 }) {
 
   const isExpanded = activeCellUrl === item.url
@@ -55,7 +51,7 @@ const Cell = React.memo(function Cell({
     >
       <img
         className={`${styles.pigImg} ${styles.pigThumbnail}${isFullSizeLoaded ? ` ${styles.pigThumbnailLoaded}` : ''}`}
-        src={getUrl(item.url, thumbnailSize || defaultThumbnailSize)}
+        src={getUrl(item.url, settings.thumbnailSize || defaultThumbnailSize)}
         alt=""
       />
       <img
@@ -68,7 +64,7 @@ const Cell = React.memo(function Cell({
       {isExpanded && (
         <img
           className={styles.pigImg}
-          src={getUrl(item.url, expandedSize || 1000)}
+          src={getUrl(item.url, settings.expandedSize)}
           alt=""
         />
       )}
@@ -82,8 +78,5 @@ Cell.propTypes = {
   item: PropTypes.object.isRequired,
   containerWidth: PropTypes.number,
   settings: PropTypes.object.isRequired,
-  getUrl: PropTypes.func,
-  expandedSize: PropTypes.number,
-  thumbnailSize: PropTypes.number,
-  showCaption: PropTypes.bool
+  getUrl: PropTypes.func
 }
