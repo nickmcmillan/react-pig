@@ -7,16 +7,15 @@ import getDate from './utils/getDate'
 import styles from './styles.css'
 const thumbnailSize = 10 // Height in px. Keeping it low seeing as it gets blurred anyway with a css filter
 
-const Cell = React.memo(function Cell({ item, containerWidth, gridGap, getUrl, activeCell, handleClick }) {  
+const Cell = React.memo(function Cell({ item, containerWidth, gridGap, getUrl, activeCell, handleClick, windowHeight, scrollY }) {
 
-  const { innerHeight, scrollY } = window
   const isExpanded = activeCell === item.url
   const [isFullSizeLoaded, setFullSizeLoaded] = useState(false)
 
   // When expanded, portrait and Landscape images are treated differently
   const isImgPortrait = item.aspectRatio <= 1
   // Based on the window height, calculate the max image width
-  const widthDerivedFromMaxWindowHeight = (innerHeight - gridGap * 2) * item.aspectRatio
+  const widthDerivedFromMaxWindowHeight = (windowHeight - gridGap * 2) * item.aspectRatio
   
   const calcWidth = (() => {
     if (isImgPortrait) {
@@ -29,7 +28,7 @@ const Cell = React.memo(function Cell({ item, containerWidth, gridGap, getUrl, a
         return widthDerivedFromMaxWindowHeight
       }
     } else {
-      if ((containerWidth / item.aspectRatio) >= innerHeight) {
+      if ((containerWidth / item.aspectRatio) >= windowHeight) {
         // 3. If it's landscape, and if its too tall to fit in the viewport height, 
         // return the widthDerivedFromMaxWindowHeight
         return widthDerivedFromMaxWindowHeight - gridGap * 2
@@ -45,16 +44,16 @@ const Cell = React.memo(function Cell({ item, containerWidth, gridGap, getUrl, a
 
   // calculate the offset position in the center of the screen
   const offsetX = (containerWidth / 2) - (calcWidth / 2) 
-  const offsetY = scrollY + (innerHeight / 2) - (calcHeight / 2) - gridGap
+  const offsetY = scrollY + (windowHeight / 2) - (calcHeight / 2) - gridGap
 
   // gridPosition is what has been set by the grid layout logic (in the parent component)
   const gridPosition = `translate3d(${item.style.translateX}px, ${item.style.translateY}px, 0)`
   // screenCenter is positioning logic for when the item is active and expanded
   const screenCenter = `translate3d(${offsetX}px, ${offsetY}, 0)`
 
-  const { width, height, transform, zIndex, outlineColor } = useSpring({
+  const { width, height, transform, zIndex, /*outlineColor*/ } = useSpring({
     transform: isExpanded ? screenCenter : gridPosition,
-    outlineColor: isExpanded ? 'rgba(255,255,255,1)' : 'rgba(255,255,255,0)',
+    // outlineColor: isExpanded ? 'rgba(255,255,255,1)' : 'rgba(255,255,255,0)',
     zIndex: isExpanded ? 1 : 0,
     width: isExpanded ? Math.ceil(calcWidth) + 'px' : item.style.width + 'px',
     height: isExpanded ? Math.ceil(calcHeight) + 'px' : item.style.height + 'px',
@@ -66,9 +65,10 @@ const Cell = React.memo(function Cell({ item, containerWidth, gridGap, getUrl, a
       className={`${styles.pigBtn}${isExpanded ? ` ${styles.pigBtnActive}` : ''}`}
       onClick={() => handleClick(item.url)}
       style={{
-        outlineStyle: 'solid',
-        outlineWidth: `${gridGap}px`,
-        outlineColor: outlineColor.interpolate(t => t),
+        // outlineStyle: 'solid',
+        // outlineWidth: `${gridGap}px`,
+        // outlineColor: outlineColor.interpolate(t => t),
+        // borderWidth: `${gridGap}px`,
         backgroundColor: item.dominantColor,
         zIndex: zIndex.interpolate(t => Math.ceil(t)),
         width: width.interpolate(t => t),
@@ -99,9 +99,9 @@ const Cell = React.memo(function Cell({ item, containerWidth, gridGap, getUrl, a
         />
       )}
 
-      <figcaption className={styles.caption}>
+      {/* <figcaption className={styles.caption}>
         <span>{getDate(item.birthTime)}</span>
-      </figcaption>
+      </figcaption> */}
     </animated.button>
   )
 })

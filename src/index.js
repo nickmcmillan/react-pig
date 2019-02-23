@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import ResizeObserver from 'react-resize-observer'
+import debounce from 'lodash.debounce'
+import throttle from 'lodash.throttle'
 
 import Cell from './Cell'
 import doLayout from './doLayout'
@@ -21,7 +22,7 @@ export default class Pig extends React.Component {
     // sort newest to old, by birthTime
     const sortedByDate = props.imageData.sort((a, b) => new Date(b.birthTime) - new Date(a.birthTime))
 
-    const imageDataWithDefaults = sortedByDate.map(x => {
+    this.imageData = sortedByDate.map(x => {
       x.style = {
         translateX: null,
         translateY: null,
@@ -32,12 +33,14 @@ export default class Pig extends React.Component {
     })
 
     this.state = {
-      imageData: imageDataWithDefaults,
       renderedItems: [],
       activeCell: null
     }
-
-    this.containerOffset = null
+    
+    this.windowHeight = window.innerHeight,
+    this.containerOffsetTop = null
+    this.containerHeight = 0
+    this.totalHeight = 0
 
     this.containerRef = React.createRef()
     this.minAspectRatio = null
@@ -46,80 +49,81 @@ export default class Pig extends React.Component {
 
     // These are the default settings, which may be overridden.
     this.settings = {
-
       gridGap: Number.isInteger(props.gridGap) ? props.gridGap : 8,
-
-      /**
-       * Type: Number
-       * Default: 3000
-       * Description: Height in pixels of images to preload in the direction
-       *   that the user is scrolling. For example, in the default case, if the
-       *   user is scrolling down, 1000px worth of images will be loaded below
-       *   the viewport.
-       */
-      primaryImageBufferHeight: props.primaryImageBufferHeight || 1500,
-
-      /**
-       * Type: Number
-       * Default: 100
-       * Description: Height in pixels of images to preload in the direction
-       *   that the user is NOT scrolling. For example, in the default case, if
-       *   the user is scrolling down, 300px worth of images will be loaded
-       *   above the viewport.  Images further up will be removed.
-       */
-      secondaryImageBufferHeight: props.secondaryImageBufferHeight || 1500,
+      primaryImageBufferHeight: props.primaryImageBufferHeight || 4000,
+      secondaryImageBufferHeight: props.secondaryImageBufferHeight || 100,
     }
+
+    this.throttledScroll = throttle(this.onScroll, 400)
+    this.debouncedResize = debounce(this.onResize, 800)
   }
 
-  setRenderedItems() {
-    if (!this.container) return
+  setRenderedItems(imageData) {
+    // Set the container height, only need to do this once.
+    if (!this.container.style.height) this.container.style.height = this.totalHeight + 'px'
 
-    // Set the container height
-    this.container.style.height = this.totalHeight + 'px'
 
     const renderedItems = doLayout({
-      containerOffset: this.containerOffset,
+      containerOffsetTop: this.containerOffsetTop,
       scrollDirection: this.scrollDirection,
       settings: this.settings,
       latestYOffset: this.latestYOffset,
-      imageData: this.state.imageData
+      imageData: imageData,
+      windowHeight: this.windowHeight,
     })
 
     this.setState({ renderedItems })
   }
 
-  onScroll = (yOffset) => {
+  onScroll = () => {
     // Compute the scroll direction using the latestYOffset and the previousYOffset
-    const newYOffset = -(yOffset - this.settings.gridGap)
-    this.previousYOffset = this.latestYOffset || newYOffset
-    this.latestYOffset = newYOffset
+    this.previousYOffset = this.latestYOffset || window.pageYOffset
+    this.latestYOffset = window.pageYOffset
     this.scrollDirection = (this.latestYOffset > this.previousYOffset) ? 'down' : 'up'
 
     window.requestAnimationFrame(() => {
-      this.setRenderedItems()
+      this.setRenderedItems(this.imageData)
       // dismiss any active cell
       if (this.state.activeCell) this.setState({ activeCell: null })
     })
   }
 
-  handleComputeLayout(wrapperWidth) {
+  onResize = () => {
+    this.imageData = this.getUpdatedImageLayout()
+    this.setRenderedItems(this.imageData)
+  }
+
+  getUpdatedImageLayout() {
+    const wrapperWidth = this.container.offsetWidth
+    
     const {
       imageData,
       newTotalHeight
     } = computeLayout({
       wrapperWidth,
       minAspectRatio: this.minAspectRatio,
-      imageData: this.state.imageData,
+      imageData: this.imageData,
       settings: this.settings,
     })
 
     this.totalHeight = newTotalHeight
-    this.setState({ imageData })
+    return imageData
   }
 
   componentDidMount() {
     this.container = this.containerRef.current
-    this.containerOffset = this.container.offsetTop
+    this.containerOffsetTop = this.container.offsetTop
+    this.containerWidth = this.container.offsetWidth
+    window.addEventListener('scroll', this.throttledScroll)
+    window.addEventListener('resize', this.debouncedResize)
+
+    this.imageData = this.getUpdatedImageLayout()
+    this.setRenderedItems(this.imageData)
+  }
+
+  componentWillUnmount () {
+    window.removeEventListener('scroll', this.throttledScroll)
+    window.removeEventListener('resize', this.debouncedResize)
   }
 
   render() {
@@ -127,22 +131,14 @@ export default class Pig extends React.Component {
       <div
         className={styles.output}
         ref={this.containerRef}
-        style={{
-          margin: `${this.settings.gridGap}px`
-        }}
+        style={{ margin: `${this.settings.gridGap}px`}}
       >
-        <ResizeObserver
-          onResize={rect => {
-            this.handleComputeLayout(rect.width)
-            this.setRenderedItems()
-          }}
-          onPosition={rect => this.onScroll(rect.top)}
-        />
         {this.state.renderedItems.map(item => (
           <Cell
+            windowHeight={this.windowHeight}
             key={item.url}
             item={item}
-            containerWidth={this.container.offsetWidth}
+            containerWidth={this.containerWidth}
             gridGap={this.settings.gridGap}
             getUrl={this.getUrl}
             handleClick={activeCell => {
@@ -151,6 +147,7 @@ export default class Pig extends React.Component {
                 activeCell: activeCell !== this.state.activeCell ? activeCell : null
                })
             }}
+            scrollY={window.scrollY}
             activeCell={this.state.activeCell}
           />
         ))}

@@ -1,3 +1,4 @@
+// Need to minimise runs of this function. The goal is to run once on init, and only ever run again on window.resize
 /**
  * This computes the layout of the entire grid, setting the height, width,
  * translateX, translateY, and transtion values for each ProgessiveImage in
@@ -22,6 +23,7 @@ export default function ({
   totalHeight,
   wrapperWidth,
 }) {
+
   // Compute the minimum aspect ratio that should be applied to the rows.
   const minAspectRatio = getMinAspectRatio(wrapperWidth)
 
