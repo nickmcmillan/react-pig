@@ -84,5 +84,6 @@ Cell.propTypes = {
   settings: PropTypes.object.isRequired,
   getUrl: PropTypes.func,
   expandedSize: PropTypes.number,
-  thumbnailSize: PropTypes.number
+  thumbnailSize: PropTypes.number,
+  showCaption: PropTypes.bool
 }

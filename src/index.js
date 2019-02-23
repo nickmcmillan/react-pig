@@ -224,5 +224,6 @@ Pig.propTypes = {
   breakpoint: PropTypes.number,
   sortFunc: PropTypes.func,
   expandedSize: PropTypes.number,
-  thumbnailSize: PropTypes.number
+  thumbnailSize: PropTypes.number,
+  showCaption: PropTypes.bool
 }
