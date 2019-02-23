@@ -4,16 +4,14 @@ export default function ({
   settings,
   latestYOffset,
   imageData,
+  windowHeight,
 }) {
-  // Get the top and bottom buffers heights
+  // Get the top and bottom buffers heights  
   const bufferTop = (scrollDirection === 'up') ? settings.primaryImageBufferHeight : settings.secondaryImageBufferHeight
-  const bufferBottom = (scrollDirection === 'down') ? settings.secondaryImageBufferHeight : settings.primaryImageBufferHeight
+  const bufferBottom = (scrollDirection === 'down') ? settings.primaryImageBufferHeight : settings.secondaryImageBufferHeight
 
-  // Now we compute the location of the top and bottom buffers:
-  const windowHeight = window.innerHeight
-
-  // that is the top of the top buffer. If the bottom of an image is above
-  // that line, it will be removed.
+  // Now we compute the location of the top and bottom buffers
+  // that is the top of the top buffer. If the bottom of an image is above that line, it will be removed.
   const minTranslateYPlusHeight = latestYOffset - containerOffsetTop - bufferTop
 
   // that is the bottom of the bottom buffer.  If the top of an image is
