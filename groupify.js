@@ -49,7 +49,22 @@ jsonfile.readFile(inputJSON, function (err, obj) {
     return groups;
   }, {});
 
-  fs.writeFile(outputJSON, JSON.stringify(groups), 'utf8', () => {
+  const groupArrays = Object.keys(groups).map((date) => {
+    // console.log(groups[date][0].location)
+    let firstLocationInGroup = ''
+    groups[date].some(i => {
+      if (i.location) firstLocationInGroup = i.location
+    })
+    
+    
+    return {
+      date,
+      firstLocationInGroup,
+      items: groups[date]
+    };
+  });
+
+  fs.writeFile(outputJSON, JSON.stringify(groupArrays), 'utf8', () => {
     console.log(`🎉  Done! Generated JSON file ${outputJSON}`)
   })
   
