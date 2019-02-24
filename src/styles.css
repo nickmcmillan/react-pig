@@ -25,6 +25,7 @@
   font: inherit;
   line-height: normal;
   cursor: pointer;
+  outline: 0px solid #eceff7; 
   -webkit-font-smoothing: inherit;
   -moz-osx-font-smoothing: inherit;
   -webkit-appearance: none;
@@ -34,6 +35,7 @@
 .pigBtn:focus .caption {
   transform: none;
 }
+
 
 .pigImg {
   position: absolute;
@@ -72,7 +74,7 @@
   opacity: 1;
 }
 
-.caption {
+/* .caption {
   position: absolute;
   bottom: 0;
   color: white;
@@ -93,4 +95,44 @@
   right: 0;
   position: absolute;
   z-index: -1;
+}
+ */
+
+.titlePositioner {
+  width: 100%;
+  position: absolute;
+}
+
+.titleInner {
+  background-color: #eceff7;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  padding-top: 8px;
+  width: 100%;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.description {
+  font-size: 1rem;
+  margin-right: 1rem;
+}
+
+.date {
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: right;
+}
+
+@media (min-width: 700px) {
+  .titleInner {
+    justify-content: flex-end;
+  }
+
+  .date {
+    font-size: 2rem;
+  }
 }

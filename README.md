@@ -77,6 +77,10 @@ export default App
 
 ## Todo: 
 - [ ] Group by months
+- [ ] group title height 
+- [ ] expanded cell outline based on gridgap
+- [ ] Dont expand if expanded size is less than container width
+- [x] bug: resizing isn't setting width correctly in cell
 - [x] Use resize observer instead of scroll/resize listeners
 - [x] Convert this package into a module
 - [x] Proptype checks

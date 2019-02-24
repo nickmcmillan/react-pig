@@ -40,7 +40,7 @@ const Cell = React.memo(function Cell({ item, containerWidth, gridGap, getUrl, a
   })()
 
   // Once all of that is out of the way, calculating the height is straightforward;
-  const calcHeight = (calcWidth / item.aspectRatio) - gridGap
+  const calcHeight = (calcWidth / item.aspectRatio) //- gridGap
 
   // calculate the offset position in the center of the screen
   const offsetX = (containerWidth / 2) - (calcWidth / 2) 
@@ -54,7 +54,7 @@ const Cell = React.memo(function Cell({ item, containerWidth, gridGap, getUrl, a
   const { width, height, transform, zIndex, /*outlineColor*/ } = useSpring({
     transform: isExpanded ? screenCenter : gridPosition,
     // outlineColor: isExpanded ? 'rgba(255,255,255,1)' : 'rgba(255,255,255,0)',
-    zIndex: isExpanded ? 1 : 0,
+    zIndex: isExpanded ? 3 : 0,
     width: isExpanded ? Math.ceil(calcWidth) + 'px' : item.style.width + 'px',
     height: isExpanded ? Math.ceil(calcHeight) + 'px' : item.style.height + 'px',
     config: { mass: 1.5, tension: 400, friction: 40 }
@@ -65,12 +65,12 @@ const Cell = React.memo(function Cell({ item, containerWidth, gridGap, getUrl, a
       className={`${styles.pigBtn}${isExpanded ? ` ${styles.pigBtnActive}` : ''}`}
       onClick={() => handleClick(item.url)}
       style={{
-        // outlineStyle: 'solid',
-        // outlineWidth: `${gridGap}px`,
-        // outlineColor: outlineColor.interpolate(t => t),
-        // borderWidth: `${gridGap}px`,
+        outlineWidth: `${gridGap}px`,
+        // hidden to prevent blurry preloader from overflowing
+        // visible so that the outline becomes visible when expanded
+        overflow: isExpanded ? 'visible' : 'hidden', 
         backgroundColor: item.dominantColor,
-        zIndex: zIndex.interpolate(t => Math.ceil(t)),
+        zIndex: zIndex.interpolate(t => Math.round(t)),
         width: width.interpolate(t => t),
         height: height.interpolate(t => t),
         transform: transform.interpolate(t => t)

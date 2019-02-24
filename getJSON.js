@@ -5,7 +5,7 @@ const cloudinary = require('cloudinary')
 const fs = require('fs')
 const ColorThief = require('color-thief-jimp')
 const Jimp = require('jimp')
-const _cliProgress = require('cli-progress');
+const _cliProgress = require('cli-progress')
 
 
 

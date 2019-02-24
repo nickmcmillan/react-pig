@@ -20,11 +20,28 @@ export default function ({
 
   // Here, we loop over every image, determine if it is inside our buffers or
   // no, and either insert it or remove it appropriately.
-  return imageData.filter(img => {
-    if (img.style.translateY + img.style.height < minTranslateYPlusHeight || img.style.translateY > maxTranslateY) {
-      return false
-    } else {
-      return true
-    }
+
+  const groupArr = []
+
+  imageData.forEach(g => {
+    const filteredInGroup = g.items.filter(img => {
+
+      if (img.style.translateY + img.style.height < minTranslateYPlusHeight || img.style.translateY > maxTranslateY) {
+        return false
+      } else {
+        return true
+      }
+    })
+
+    groupArr.push({
+      items: filteredInGroup,
+      date: g.date,
+      firstLocationInGroup: g.firstLocationInGroup,
+      groupTranslateY: g.groupTranslateY,
+      height: g.height,
+    })
   })
+
+  return groupArr
+  
 }

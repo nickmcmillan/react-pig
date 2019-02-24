@@ -20,42 +20,36 @@ export default class Pig extends React.Component {
     this.getUrl = props.getUrl || getUrl
 
     // sort newest to old, by birthTime
-    const sortedByDate = props.imageData.sort((a, b) => new Date(b.birthTime) - new Date(a.birthTime))
-
-    this.imageData = sortedByDate.map(x => {
-      x.style = {
-        translateX: null,
-        translateY: null,
-        width: null,
-        height: null,
-      }
-      return x
-    })
+    // const sortedByDate = props.imageData.sort((a, b) => new Date(b.birthTime) - new Date(a.birthTime))
+    this.imageData = props.imageData
 
     this.state = {
       renderedItems: [],
       activeCell: null
     }
-    
+
     this.windowHeight = window.innerHeight,
-    this.containerOffsetTop = null
-    this.containerHeight = 0
+      this.containerOffsetTop = null
+    this.titleHeight = 0
+    // this.containerHeight = 0
     this.totalHeight = 0
 
     this.containerRef = React.createRef()
+    this.titleRef = React.createRef()
     this.minAspectRatio = null
     this.latestYOffset = 0
     this.scrollDirection = 'down'
 
     // These are the default settings, which may be overridden.
     this.settings = {
+      groupTitleHeight: props.groupTitleHeight || 50,
       gridGap: Number.isInteger(props.gridGap) ? props.gridGap : 8,
       primaryImageBufferHeight: props.primaryImageBufferHeight || 4000,
       secondaryImageBufferHeight: props.secondaryImageBufferHeight || 100,
     }
 
-    this.throttledScroll = throttle(this.onScroll, 400)
-    this.debouncedResize = debounce(this.onResize, 800)
+    this.throttledScroll = throttle(this.onScroll, 200)
+    this.debouncedResize = debounce(this.onResize, 500)
   }
 
   setRenderedItems(imageData) {
@@ -92,19 +86,24 @@ export default class Pig extends React.Component {
     this.imageData = this.getUpdatedImageLayout()
     this.setRenderedItems(this.imageData)
     this.container.style.height = this.totalHeight + 'px' // set the container height again based on new layout
+    this.containerWidth = this.container.offsetWidth
   }
 
   getUpdatedImageLayout() {
     const wrapperWidth = this.container.offsetWidth
+    console.log(this.container)
     
+
     const {
       imageData,
       newTotalHeight
     } = computeLayout({
       wrapperWidth,
+      groupTitleHeight: this.settings.groupTitleHeight,
       minAspectRatio: this.minAspectRatio,
       imageData: this.imageData,
       settings: this.settings,
+      group: true,
     })
 
     this.totalHeight = newTotalHeight
@@ -122,7 +121,7 @@ export default class Pig extends React.Component {
     this.setRenderedItems(this.imageData)
   }
 
-  componentWillUnmount () {
+  componentWillUnmount() {
     window.removeEventListener('scroll', this.throttledScroll)
     window.removeEventListener('resize', this.debouncedResize)
   }
@@ -132,26 +131,54 @@ export default class Pig extends React.Component {
       <div
         className={styles.output}
         ref={this.containerRef}
-        style={{ margin: `${this.settings.gridGap}px`}}
+        style={{ margin: `${this.settings.gridGap}px` }}
       >
-        {this.state.renderedItems.map(item => (
-          <Cell
-            windowHeight={this.windowHeight}
-            key={item.url}
-            item={item}
-            containerWidth={this.containerWidth}
-            gridGap={this.settings.gridGap}
-            getUrl={this.getUrl}
-            handleClick={activeCell => {
-              this.setState({ 
-                // if cell is already active, deactivate it
-                activeCell: activeCell !== this.state.activeCell ? activeCell : null
-               })
-            }}
-            scrollY={window.scrollY}
-            activeCell={this.state.activeCell}
-          />
-        ))}
+        {this.state.renderedItems.map(group => {
+
+          return (
+            <React.Fragment key={group.date}>
+
+              {!!group.items.length &&
+                <div
+                  className={styles.titlePositioner}
+                  style={{
+                    top: `${group.groupTranslateY - this.settings.groupTitleHeight}px`,
+                    height: `${group.height + this.settings.groupTitleHeight}px`,
+                  }}
+                >
+                  <div className={styles.titleInner} style={{height: `${this.settings.groupTitleHeight}px`}}>
+                    <span className={styles.description}>
+                      {group.firstLocationInGroup}
+                    </span>
+                    <span className={styles.date}>
+                      {group.date}
+                    </span>
+                  </div>
+                </div>
+              }
+
+              {group.items.map(item => (
+                <Cell
+                  windowHeight={this.windowHeight}
+                  containerWidth={this.containerWidth}
+                  key={item.url}
+                  item={item}
+                  gridGap={this.settings.gridGap}
+                  getUrl={this.getUrl}
+                  handleClick={activeCell => {
+                    this.setState({
+                      // if cell is already active, deactivate it
+                      activeCell: activeCell !== this.state.activeCell ? activeCell : null
+                    })
+                  }}
+                  scrollY={window.scrollY}
+                  activeCell={this.state.activeCell}
+                />
+              ))}
+            </React.Fragment>
+          )
+          
+        })}
       </div>
     )
   }
