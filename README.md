@@ -60,6 +60,8 @@ class App extends Component {
     return (
       <Pig
         imageData={imageData} // Array. Required.
+        sortByDate // Boolean. Optional. Sorts descending by 'date' value
+        groupByDate // Boolean. Optional. Groups images by 'date' value. And uses the first 'location' in the group for the heading text.
         gridGap={10} // Integer. Optional. Defaults to 8
         bgColor="#fff" // String. Optional. Used for outlines when image is expanded, and for group headings
         getUrl={(url, pxHeight) => {
@@ -75,10 +77,6 @@ class App extends Component {
           // getUrl is optional.
           // If you omit this prop completely, Pig will do exactly this;
         }}
-
-        // Grouping options
-        sortByDate // Boolean. Optional. Sorts descending by 'date' value
-        groupByDate // Boolean. Optional. Groups images by 'date' value. And uses the first 'location' in the group for the heading text.
       />
     )
   }
