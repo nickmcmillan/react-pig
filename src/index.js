@@ -9,6 +9,8 @@ import calcRenderableItems from './calcRenderableItems'
 import computeLayout from './computeLayout'
 import computeLayoutGroups from './computeLayoutGroups'
 import getUrl from './utils/getUrl'
+import sortByDate from './utils/sortByDate'
+import groupByDate from './utils/groupByDate'
 
 import styles from './styles.css'
 
@@ -25,6 +27,10 @@ export default class Pig extends React.Component {
     this.getUrl = props.getUrl || getUrl
 
     this.imageData = props.imageData
+    // do sorting
+    if (props.sortByDate) this.imageData = sortByDate(this.imageData)
+    // do grouping
+    if (props.groupByDate) this.imageData = groupByDate(this.imageData)
 
     this.state = {
       renderedItems: [],
@@ -47,7 +53,7 @@ export default class Pig extends React.Component {
       secondaryImageBufferHeight: props.secondaryImageBufferHeight || 100,
 
       // settings specific to groups
-      groups: props.groups || false,
+      groupByDate: props.groupByDate || false,
       breakpoint: props.breakpoint || 800,
       groupGapSm: props.groupGapSm || 50,
       groupGapLg: props.groupGapLg || 50,
@@ -97,7 +103,7 @@ export default class Pig extends React.Component {
   getUpdatedImageLayout() {
     const wrapperWidth = this.container.offsetWidth
 
-    if (this.settings.groups) {
+    if (this.settings.groupByDate) {
 
       const {
         imageData,
@@ -125,8 +131,6 @@ export default class Pig extends React.Component {
       this.totalHeight = newTotalHeight
       return imageData
     }
-    
-
   }
 
   componentDidMount() {
@@ -139,7 +143,7 @@ export default class Pig extends React.Component {
     this.imageData = this.getUpdatedImageLayout()
     this.setRenderedItems(this.imageData)
   }
-
+  
   componentWillUnmount() {
     window.removeEventListener('scroll', this.throttledScroll)
     window.removeEventListener('resize', this.debouncedResize)
@@ -182,7 +186,7 @@ export default class Pig extends React.Component {
         style={{ margin: `${this.settings.gridGap}px` }}
       >
         {this.state.renderedItems.map(item => {
-          if (this.settings.groups) {
+          if (this.settings.groupByDate) {
             return this.renderGroup(item)
           } else {
             return this.renderFlat(item)

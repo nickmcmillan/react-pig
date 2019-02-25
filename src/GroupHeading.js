@@ -14,7 +14,7 @@ export default ({
       height: `${group.height - settings.gridGap}px`,
     }}
   >
-    <div className={styles.headerInner}>
+    <div className={styles.headerInner} style={{ backgroundColor: settings.bgColor }}>
       <span className={styles.description}>
         {group.description}
       </span>

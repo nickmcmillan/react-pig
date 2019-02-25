@@ -7,10 +7,8 @@ const ColorThief = require('color-thief-jimp')
 const Jimp = require('jimp')
 const _cliProgress = require('cli-progress')
 
-
-
-const outputJSONFileName = argv.out || 'output.json'
-const cloudinaryFolder = argv.cloudfolder || ''
+const outputJSONFileName = argv.out || './output.json'
+const cloudinaryFolder = argv.cloudinaryFolder || ''
 
 const cloud_name = process.env.cloud_name
 const api_key = process.env.api_key

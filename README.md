@@ -31,14 +31,25 @@ api_key="1234567890"
 api_secret="yourapisecret"
 ```
 
-3. Run the file thusly `node upload.js --in=./imgs/ --out=./imageData.json --cloudinaryFolder=whatever`
+3. Run the file thusly `node upload --in=./imgs/ --out=./imageData.json --cloudinaryFolder=whatever`
 * `--in` - your local folder where your images are at
 * `--out` - the output JSON file
 * `--cloudinaryFolder` - the folder in Cloudinary (optional)
 
+### For Apple Photos users
+The Apple Photos app conveniently has a feature where it can export your photos into folders named with location and date. `upload.js` will use these folder names to automatically add `location` and `date` meta data to the images. This is useful for grouping images later. To export your images from Apple Photos;
+1. Select all images to export
+2. File -> Export -> Export Unmodified Original... -> Filename: Use Title & Subfolder Format: Moment Name
+3. When running upload.js just point it at the generated folder.
+
+## generateJSON.js
+This file can be used if you've already uploaded your images to Cloudinary and just want to generate the JSON file for them.
+Assuming you have a Cloudinary account and have set up your .env file accordingly, you can run this file with;
+
+`node generateJSON --cloudinaryFolder=whateverFolderYouWantJsonFor --out=./outputFilename.json`
 
 
-## Example usage of Pig
+# Example usage of Pig
 
 ```
 import Pig from 'pig-react'
@@ -50,22 +61,24 @@ class App extends Component {
       <Pig
         imageData={imageData} // Array. Required.
         gridGap={10} // Integer. Optional. Defaults to 8
+        bgColor="#fff" // String. Optional. Used for outlines when image is expanded, and for group headings
         getUrl={(url, pxHeight) => {
           // Pig calls this function every time it needs to fetch an image.
-          // The `url` arg will be provided as is from imageData
-          // Assuming the imageData was generated using `upload.js`, the url string will contain {{HEIGHT}}
-          // The purpose of this function is to replace {{HEIGHT}} value with a dynamic value (which is passed in with `pxHeight`)
-
+          // The url arg will be provided as is from imageData
+          // Assuming the imageData was generated using upload.js, the url string will contain {{HEIGHT}}
+          // The purpose of this function is to replace {{HEIGHT}} value with a dynamic value (which is passed in with pxHeight)
           // Eg this:
           // http://res.cloudinary.com/cloudinaryusername/image/upload/h_{{HEIGHT}}/v12345678/cloudinaryfolder/image.jpg
           // Becomes this:
           // http://res.cloudinary.com/cloudinaryusername/image/upload/h_800/v12345678/cloudinaryfolder/image.jpg
-          
           // This gives you flexibility to define what the url looks like in case you're using something other than Cloudinary.
-
           // getUrl is optional.
           // If you omit this prop completely, Pig will do exactly this;
         }}
+
+        // Grouping options
+        sortByDate // Boolean. Optional. Sorts descending by 'date' value
+        groupByDate // Boolean. Optional. Groups images by 'date' value. And uses the first 'location' in the group for the heading text.
       />
     )
   }
@@ -76,10 +89,9 @@ export default App
 
 
 ## Todo: 
-- [ ] Group by months
-- [ ] group title height 
-- [ ] expanded cell outline based on gridgap
 - [ ] Dont expand if expanded size is less than container width
+- [x] expanded cell outline based on gridgap
+- [x] Group by months
 - [x] bug: resizing isn't setting width correctly in cell
 - [x] Use resize observer instead of scroll/resize listeners
 - [x] Convert this package into a module

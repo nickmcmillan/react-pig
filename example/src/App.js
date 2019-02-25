@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import Pig from 'pig-react'
-import imageData from './grouped.json'
-// import imageData from './2017.json'
+import imageData from './imageData.json'
 
 class App extends Component {
   render() {
@@ -10,14 +9,13 @@ class App extends Component {
         <Pig
           imageData={imageData}
           gridGap={10}
-          
           bgColor="#f8faff"
           groupGapLg={50}
           groupGapSm={20}
           breakpoint={800}
-          groups
+          sortByDate
+          groupByDate
         />
-
       </div>
     )
   }

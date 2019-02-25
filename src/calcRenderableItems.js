@@ -18,7 +18,7 @@ export default function ({
   // below that line, it will be removed.
   const maxTranslateY = latestYOffset + windowHeight + bufferBottom
 
-  if (settings.groups) {
+  if (settings.groupByDate) {
     // Here, we loop over every image, determine if it is inside our buffers
     const arrOfGroups = []
     imageData.forEach(g => {
