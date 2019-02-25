@@ -10,9 +10,12 @@ class App extends Component {
         <Pig
           imageData={imageData}
           gridGap={10}
+          
+          bgColor="#f8faff"
           groupGapLg={50}
           groupGapSm={20}
           breakpoint={800}
+          groups
         />
 
       </div>

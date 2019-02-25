@@ -51,15 +51,15 @@ jsonfile.readFile(inputJSON, function (err, obj) {
 
   const groupArrays = Object.keys(groups).map((date) => {
     // console.log(groups[date][0].location)
-    let firstLocationInGroup = ''
+    let description = ''
     groups[date].some(i => {
-      if (i.location) firstLocationInGroup = i.location
+      if (i.location) description = i.location
     })
     
     
     return {
       date,
-      firstLocationInGroup,
+      description,
       items: groups[date]
     };
   });

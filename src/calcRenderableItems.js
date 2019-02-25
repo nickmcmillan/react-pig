@@ -18,29 +18,40 @@ export default function ({
   // below that line, it will be removed.
   const maxTranslateY = latestYOffset + windowHeight + bufferBottom
 
-  // Here, we loop over every image, determine if it is inside our buffers
-  const arrOfGroups = []
-  imageData.forEach(g => {
-    const filteredInGroup = g.items.filter(img => {
+  if (settings.groups) {
+    // Here, we loop over every image, determine if it is inside our buffers
+    const arrOfGroups = []
+    imageData.forEach(g => {
+      const filteredInGroup = g.items.filter(img => {
 
+        if (img.style.translateY + img.style.height < minTranslateYPlusHeight || img.style.translateY > maxTranslateY) {
+          return false
+        } else {
+          return true
+        }
+      })
+
+      // if the group has no items within it, don't render the group at all
+      if (!filteredInGroup.length) return
+
+      arrOfGroups.push({
+        items: filteredInGroup,
+        date: g.date,
+        description: g.description,
+        groupTranslateY: g.groupTranslateY,
+        height: g.height,
+      })
+    })
+
+    return arrOfGroups
+  } else {
+    return imageData.filter(img => {
       if (img.style.translateY + img.style.height < minTranslateYPlusHeight || img.style.translateY > maxTranslateY) {
         return false
       } else {
         return true
       }
     })
+  }
 
-    // if the group has no items within it, don't render the group at all
-    if (!filteredInGroup.length) return
-
-    arrOfGroups.push({
-      items: filteredInGroup,
-      date: g.date,
-      description: g.description,
-      groupTranslateY: g.groupTranslateY,
-      height: g.height,
-    })
-  })
-
-  return arrOfGroups
 }
