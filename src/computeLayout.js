@@ -43,7 +43,7 @@ export default function ({
     // or when we're out of images, we say that we have all the images we
     // need for that row, and compute the style values for each of these
     // images.
-    rowAspectRatio += parseFloat(image.aspectRatio)
+    rowAspectRatio += image.aspectRatio
     if (rowAspectRatio >= minAspectRatio || index + 1 === imageData.length) {
 
       // Compute that row's height.

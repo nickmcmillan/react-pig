@@ -13,7 +13,7 @@ const outputJSONFileName = argv.out || './imageData.json'
 const cloudinaryFolder = argv.cloudinaryFolder || ''
 // const author = argv.a || ''
 
-if (!localImgFolder) throw new Error('Missing -in arg')
+if (!localImgFolder) throw new Error('Missing --in arg')
 
 const cloud_name = process.env.cloud_name
 const api_key = process.env.api_key
@@ -107,7 +107,8 @@ recursive(localImgFolder, async (err, files) => {
     }
 
     try {
-      // Possible folder name formats.
+      // Possible folder name formats;
+      // ./ (image in root folder)
       // 25 March 2016
       // Amsterdam - Oud-West - Jacob van Lennepstraat, 18 February 2019
       // Beirut, Beirut - Younas Gebayli Street, 13 October 2017

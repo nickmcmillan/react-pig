@@ -50,6 +50,7 @@
     "eslint-plugin-react": "^7.10.0",
     "gh-pages": "^1.2.0",
     "jimp": "^0.6.0",
+    "jsonfile": "^5.0.0",
     "minimist": "^1.2.0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
