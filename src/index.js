@@ -4,7 +4,8 @@ import debounce from 'lodash.debounce'
 import throttle from 'lodash.throttle'
 
 import Cell from './Cell'
-import doLayout from './doLayout'
+import GroupHeading from './GroupHeading'
+import calcRenderableItems from './calcRenderableItems'
 import computeLayout from './computeLayout'
 import getUrl from './utils/getUrl'
 
@@ -19,8 +20,6 @@ export default class Pig extends React.Component {
     // if getUrl has been provided as a prop, use it. otherwise use the default getUrl from /utils
     this.getUrl = props.getUrl || getUrl
 
-    // sort newest to old, by birthTime
-    // const sortedByDate = props.imageData.sort((a, b) => new Date(b.birthTime) - new Date(a.birthTime))
     this.imageData = props.imageData
 
     this.state = {
@@ -29,9 +28,7 @@ export default class Pig extends React.Component {
     }
 
     this.windowHeight = window.innerHeight,
-      this.containerOffsetTop = null
-    this.titleHeight = 0
-    // this.containerHeight = 0
+    this.containerOffsetTop = null
     this.totalHeight = 0
 
     this.containerRef = React.createRef()
@@ -42,10 +39,13 @@ export default class Pig extends React.Component {
 
     // These are the default settings, which may be overridden.
     this.settings = {
-      groupTitleHeight: props.groupTitleHeight || 50,
       gridGap: Number.isInteger(props.gridGap) ? props.gridGap : 8,
-      primaryImageBufferHeight: props.primaryImageBufferHeight || 4000,
+      group: props.group || true,
+      primaryImageBufferHeight: props.primaryImageBufferHeight || 2000,
       secondaryImageBufferHeight: props.secondaryImageBufferHeight || 100,
+      breakpoint: props.breakpoint || 800,
+      groupGapSm: props.groupGapSm || 50,
+      groupGapLg: props.groupGapLg || 50,
     }
 
     this.throttledScroll = throttle(this.onScroll, 200)
@@ -57,7 +57,7 @@ export default class Pig extends React.Component {
     if (!this.container.style.height) this.container.style.height = this.totalHeight + 'px'
 
 
-    const renderedItems = doLayout({
+    const renderedItems = calcRenderableItems({
       containerOffsetTop: this.containerOffsetTop,
       scrollDirection: this.scrollDirection,
       settings: this.settings,
@@ -91,7 +91,6 @@ export default class Pig extends React.Component {
 
   getUpdatedImageLayout() {
     const wrapperWidth = this.container.offsetWidth
-    console.log(this.container)
     
 
     const {
@@ -99,11 +98,9 @@ export default class Pig extends React.Component {
       newTotalHeight
     } = computeLayout({
       wrapperWidth,
-      groupTitleHeight: this.settings.groupTitleHeight,
       minAspectRatio: this.minAspectRatio,
       imageData: this.imageData,
       settings: this.settings,
-      group: true,
     })
 
     this.totalHeight = newTotalHeight
@@ -133,52 +130,34 @@ export default class Pig extends React.Component {
         ref={this.containerRef}
         style={{ margin: `${this.settings.gridGap}px` }}
       >
-        {this.state.renderedItems.map(group => {
+        {this.state.renderedItems.map(group => (
+          <React.Fragment key={group.date}>
 
-          return (
-            <React.Fragment key={group.date}>
+            <GroupHeading
+              settings={this.settings}
+              group={group}
+            />
 
-              {!!group.items.length &&
-                <div
-                  className={styles.titlePositioner}
-                  style={{
-                    top: `${group.groupTranslateY - this.settings.groupTitleHeight}px`,
-                    height: `${group.height + this.settings.groupTitleHeight}px`,
-                  }}
-                >
-                  <div className={styles.titleInner} style={{height: `${this.settings.groupTitleHeight}px`}}>
-                    <span className={styles.description}>
-                      {group.firstLocationInGroup}
-                    </span>
-                    <span className={styles.date}>
-                      {group.date}
-                    </span>
-                  </div>
-                </div>
-              }
-
-              {group.items.map(item => (
-                <Cell
-                  windowHeight={this.windowHeight}
-                  containerWidth={this.containerWidth}
-                  key={item.url}
-                  item={item}
-                  gridGap={this.settings.gridGap}
-                  getUrl={this.getUrl}
-                  handleClick={activeCell => {
-                    this.setState({
-                      // if cell is already active, deactivate it
-                      activeCell: activeCell !== this.state.activeCell ? activeCell : null
-                    })
-                  }}
-                  scrollY={window.scrollY}
-                  activeCell={this.state.activeCell}
-                />
-              ))}
-            </React.Fragment>
-          )
-          
-        })}
+            {group.items.map(item => (
+              <Cell
+                windowHeight={this.windowHeight}
+                containerWidth={this.containerWidth}
+                key={item.url}
+                item={item}
+                gridGap={this.settings.gridGap}
+                getUrl={this.getUrl}
+                handleClick={activeCell => {
+                  this.setState({
+                    // if cell is already active, deactivate it
+                    activeCell: activeCell !== this.state.activeCell ? activeCell : null
+                  })
+                }}
+                scrollY={window.scrollY}
+                activeCell={this.state.activeCell}
+              />
+            ))}
+          </React.Fragment>
+        ))}
       </div>
     )
   }

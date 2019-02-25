@@ -23,16 +23,16 @@ export default function ({
   imageData,
   settings,
   totalHeight,
-  groupTitleHeight,
   wrapperWidth,
   group,
 }) {
 
   // Compute the minimum aspect ratio that should be applied to the rows.
   const minAspectRatio = getMinAspectRatio(wrapperWidth)
+  const groupTitleHeight = wrapperWidth < settings.breakpoint ? 50 : 50
 
   const tempGroupData = []
-  let translateY = groupTitleHeight // The current translateY value that we are at
+  let translateY = 0
 
   imageData.forEach(g => {
     let groupHeight = 0
@@ -40,6 +40,7 @@ export default function ({
     let row = []           // The list of images in the current row.
     let translateX = 0     // The current translateX value that we are at
     let rowAspectRatio = 0 // The aspect ratio of the row we are building
+    let rowHeight = 0
 
     // Loop through all our images, building them up into rows and computing
     // the working rowAspectRatio.
@@ -60,7 +61,7 @@ export default function ({
 
         // Compute that row's height.
         let totalDesiredWidthOfImages = wrapperWidth - settings.gridGap * (row.length - 1)
-        let rowHeight = totalDesiredWidthOfImages / rowAspectRatio
+        rowHeight = totalDesiredWidthOfImages / rowAspectRatio
 
         // Handles cases where we don't have enough images to fill a row
         if (rowAspectRatio < minAspectRatio) {
@@ -81,10 +82,10 @@ export default function ({
           tempImgData.push({
             ...img,
             style: {
-              width: parseFloat((imageWidth).toFixed(3), 10),
-              height: parseFloat((rowHeight).toFixed(3), 10),
+              width: imageWidth,
+              height: rowHeight,
               translateX,
-              translateY,
+              translateY: translateY + groupTitleHeight,
             }
           })
 
@@ -97,19 +98,20 @@ export default function ({
         rowAspectRatio = 0
         translateX = 0
 
-        translateY += parseInt(rowHeight, 10) + settings.gridGap
-        groupHeight += parseInt(rowHeight, 10) + settings.gridGap
+        translateY += Math.round(rowHeight + settings.gridGap)
+        groupHeight += Math.round(rowHeight + settings.gridGap)
       }
     })
 
-    translateY += groupTitleHeight // create space between groups to insert the title
+    const groupGap = wrapperWidth < settings.breakpoint ? settings.groupGapSm : settings.groupGapLg
+    translateY += groupGap + groupTitleHeight // create space between groups to insert the title
 
     tempGroupData.push({
       date: g.date,
-      firstLocationInGroup: g.firstLocationInGroup,
-      groupTranslateY,
+      description: g.description,
+      groupTranslateY: groupTranslateY,
       items: tempImgData,
-      height: groupHeight,
+      height: groupHeight + groupTitleHeight,
     })
     
   })
