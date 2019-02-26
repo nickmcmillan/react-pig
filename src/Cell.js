@@ -7,9 +7,9 @@ import styles from './styles.css'
 
 const thumbnailSize = 10 // Height in px. Keeping it low seeing as it gets blurred anyway with a css filter
 
-const Cell = React.memo(function Cell({ item, containerWidth, getUrl, activeCell, handleClick, windowHeight, scrollY, settings }) {
+const Cell = React.memo(function Cell({ item, containerWidth, getUrl, activeCellUrl, handleClick, windowHeight, settings }) {
 
-  const isExpanded = activeCell === item.url
+  const isExpanded = activeCellUrl === item.url
   const [isFullSizeLoaded, setFullSizeLoaded] = useState(false)
 
   const { calcWidth, calcHeight, offsetX, offsetY } = getCellMeasurements({ item, windowHeight, settings, containerWidth })
@@ -29,6 +29,7 @@ const Cell = React.memo(function Cell({ item, containerWidth, getUrl, activeCell
 
   return (
     <animated.button
+      // id={item.id.replace('/', '-')} // replace slashes just in case, because we use the id as an anchor
       className={`${styles.pigBtn}${isExpanded ? ` ${styles.pigBtnActive}` : ''}`}
       onClick={() => handleClick(item.url)}
       style={{

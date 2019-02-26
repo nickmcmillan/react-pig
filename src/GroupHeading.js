@@ -6,7 +6,7 @@ import styles from './styles.css'
 export default ({
   settings,
   group,
-  activeCell,
+  activeCellUrl,
 }) => (
   <header
     className={styles.headerPositioner}
@@ -19,7 +19,7 @@ export default ({
       className={styles.headerInner}
       style={{
         backgroundColor: settings.bgColor,
-        zIndex: activeCell ? 1 : 2,
+        zIndex: activeCellUrl ? 1 : 2,
       }}
     >
       <span className={styles.description}>

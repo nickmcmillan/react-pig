@@ -34,7 +34,7 @@ export default class Pig extends React.Component {
 
     this.state = {
       renderedItems: [],
-      activeCell: null
+      activeCellUrl: null
     }
 
     this.windowHeight = window.innerHeight,
@@ -89,7 +89,7 @@ export default class Pig extends React.Component {
     window.requestAnimationFrame(() => {
       this.setRenderedItems(this.imageData)
       // dismiss any active cell
-      if (this.state.activeCell) this.setState({ activeCell: null })
+      if (this.state.activeCellUrl) this.setState({ activeCellUrl: null })
     })
   }
 
@@ -150,29 +150,28 @@ export default class Pig extends React.Component {
     window.removeEventListener('resize', this.debouncedResize)
   }
 
-  renderCell = (item) => (
+  renderCell = item => (
     <Cell
+      key={item.url}
       windowHeight={this.windowHeight}
       containerWidth={this.containerWidth}
-      key={item.url}
       item={item}
       gridGap={this.settings.gridGap}
       getUrl={this.getUrl}
-      handleClick={activeCell => {
+      handleClick={itemUrl => {
         this.setState({
           // if cell is already active, deactivate it
-          activeCell: activeCell !== this.state.activeCell ? activeCell : null
+          activeCellUrl: itemUrl !== this.state.activeCellUrl ? itemUrl : null
         })
       }}
-      scrollY={window.scrollY}
-      activeCell={this.state.activeCell}
+      activeCellUrl={this.state.activeCellUrl}
       settings={this.settings}
     />
   )
 
   renderGroup = group => (
     <React.Fragment key={group.date}>
-      <GroupHeading settings={this.settings} group={group} activeCell={this.state.activeCell} />
+      <GroupHeading settings={this.settings} group={group} activeCellUrl={this.state.activeCellUrl} />
       {group.items.map(item => this.renderCell(item))}
     </React.Fragment>
   )
