@@ -56,16 +56,22 @@ const Cell = React.memo(function Cell({ item, containerWidth, getUrl, activeCell
       {isExpanded && (
         // when active, load in the full size image.
         // number is arbitrary. It's just a bigger value so a better quality image.
-        <img
-          className={styles.pigImg}
-          src={getUrl(item.url, 1200)}
-          alt=""
-        />
+        <React.Fragment>
+          <img
+            className={styles.pigImg}
+            src={getUrl(item.url, 1200)}
+            alt=""
+          />
+          {item.location &&
+            <figcaption className={styles.caption}>
+              <span>{item.location}</span>
+            </figcaption>
+          }
+
+        </React.Fragment>
       )}
 
-      {/* <figcaption className={styles.caption}>
-        <span>{getDate(item.birthTime)}</span>
-      </figcaption> */}
+      
     </animated.button>
   )
 })
