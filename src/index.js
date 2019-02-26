@@ -19,9 +19,6 @@ export default class Pig extends React.Component {
     super(props)
 
     if (!props.imageData) throw new Error('imageData is missing')
-    if (props.groups && !props.imageData[0].items) {
-      throw new Error(`Used 'groups' prop but the imageData provided is in the wrong format. Check the package readme.md for a guide on how to prepare the imageData.`)
-    }
 
     // if getUrl has been provided as a prop, use it. otherwise use the default getUrl from /utils
     this.getUrl = props.getUrl || getUrl
@@ -48,7 +45,8 @@ export default class Pig extends React.Component {
     this.scrollDirection = 'down'
 
     this.settings = {
-      gridGap: Number.isInteger(props.gridGap) ? props.gridGap : 8,
+      gridGap: props.gridGap || 8,
+      bgColor: props.bgColor || '#fff',
       primaryImageBufferHeight: props.primaryImageBufferHeight || 2500,
       secondaryImageBufferHeight: props.secondaryImageBufferHeight || 100,
 
@@ -57,7 +55,6 @@ export default class Pig extends React.Component {
       breakpoint: props.breakpoint || 800,
       groupGapSm: props.groupGapSm || 50,
       groupGapLg: props.groupGapLg || 50,
-      bgColor: props.bgColor || '#fff',
     }
 
     this.throttledScroll = throttle(this.onScroll, 200)
@@ -180,11 +177,7 @@ export default class Pig extends React.Component {
 
   render() {
     return (
-      <div
-        className={styles.output}
-        ref={this.containerRef}
-        style={{ margin: `${this.settings.gridGap}px` }}
-      >
+      <div className={styles.output} ref={this.containerRef}>
         {this.state.renderedItems.map(item => {
           if (this.settings.groupByDate) {
             return this.renderGroup(item)
@@ -203,4 +196,9 @@ Pig.propTypes = {
   getUrl: PropTypes.func,
   primaryImageBufferHeight: PropTypes.number,
   secondaryImageBufferHeight: PropTypes.number,
+  sortByDate: PropTypes.bool,
+  groupByDate: PropTypes.bool,
+  groupGapSm: PropTypes.number,
+  groupGapLg: PropTypes.number,
+  breakpoint: PropTypes.number,
 }
