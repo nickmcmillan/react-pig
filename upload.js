@@ -148,7 +148,7 @@ recursive(localImgFolder, async (err, files) => {
       // we need to construct a URL that looks like this example;
       // http://res.cloudinary.com/dzroyrypi/image/upload/h_{{HEIGHT}}/v1549624762/europe/DSCF0310.jpg'
       // the {{HEIGHT}} is replaced by pig when dyanmically loading different image resolutions
-      const url = `http://res.cloudinary.com/${cloud_name}/image/upload/h_{{HEIGHT}}/v${version}/${public_id}.${format}`
+      const url = `https://res.cloudinary.com/${cloud_name}/image/upload/h_{{HEIGHT}}/v${version}/${public_id}.${format}`
 
       const fileData = {
         id: public_id.split('/')[1],

@@ -104,7 +104,7 @@ const getDominantColor = url => new Promise(async (resolve, reject) => {
       context,
     } = img
 
-    const url = `http://res.cloudinary.com/${cloud_name}/image/upload/h_{{HEIGHT}}/v${version}/${public_id}.${format}`
+    const url = `https://res.cloudinary.com/${cloud_name}/image/upload/h_{{HEIGHT}}/v${version}/${public_id}.${format}`
 
     outputArr.push({
       id: public_id.split('/')[1],
