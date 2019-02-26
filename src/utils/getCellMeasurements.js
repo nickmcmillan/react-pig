@@ -31,7 +31,7 @@ export default ({ item, windowHeight, settings, containerWidth }) => {
 
   // calculate the offset position in the center of the screen
   const offsetX = (containerWidth / 2) - (calcWidth / 2)
-  const offsetY = scrollY + (windowHeight / 2) - (calcHeight / 2) - settings.gridGap
+  const offsetY = scrollY + (windowHeight / 2) - (calcHeight / 2)
 
   return { calcWidth, calcHeight, offsetX, offsetY }
 }
