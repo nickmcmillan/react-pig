@@ -109,18 +109,17 @@
   line-height: 1.5;
   display: flex;
   align-items: baseline;
-  justify-content: space-between;
+  /* justify-content: space-between; */
 }
 
 .description {
-  align-self: flex-end;
+  /* align-self: flex-end; */
   font-size: 15px;
   margin-right: 1rem;
   flex: 1;
 }
 
 .date {
-  align-self: flex-end;
   font-size: 18px;
   font-weight: bold;
   text-align: right;
@@ -143,10 +142,10 @@
   }
 
   .date {
-    align-self: inherit;
+    flex: inherit;
   }
 
   .description {
-    align-self: inherit;
+    flex: inherit;
   }
 }
