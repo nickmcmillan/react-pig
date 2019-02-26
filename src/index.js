@@ -98,6 +98,7 @@ export default class Pig extends React.Component {
     this.setRenderedItems(this.imageData)
     this.container.style.height = this.totalHeight + 'px' // set the container height again based on new layout
     this.containerWidth = this.container.offsetWidth
+    this.windowHeight = window.innerHeight
   }
 
   getUpdatedImageLayout() {
@@ -171,7 +172,7 @@ export default class Pig extends React.Component {
 
   renderGroup = group => (
     <React.Fragment key={group.date}>
-      <GroupHeading settings={this.settings} group={group} />
+      <GroupHeading settings={this.settings} group={group} activeCell={this.state.activeCell} />
       {group.items.map(item => this.renderCell(item))}
     </React.Fragment>
   )

@@ -21,7 +21,7 @@ const Cell = React.memo(function Cell({ item, containerWidth, getUrl, activeCell
 
   const { width, height, transform, zIndex } = useSpring({
     transform: isExpanded ? screenCenter : gridPosition,
-    zIndex: isExpanded ? 3 : 0,
+    zIndex: isExpanded ? 10 : 0, // 10 so that it takes a little longer before settling at 0
     width: isExpanded ? Math.ceil(calcWidth) + 'px' : item.style.width + 'px',
     height: isExpanded ? Math.ceil(calcHeight) + 'px' : item.style.height + 'px',
     config: { mass: 1.5, tension: 400, friction: 40 }
@@ -32,7 +32,7 @@ const Cell = React.memo(function Cell({ item, containerWidth, getUrl, activeCell
       className={`${styles.pigBtn}${isExpanded ? ` ${styles.pigBtnActive}` : ''}`}
       onClick={() => handleClick(item.url)}
       style={{
-        outline: isExpanded ? `${settings.gridGap}px solid ${settings.bgColor}` : 'none',
+        outline: isExpanded ? `${settings.gridGap}px solid ${settings.bgColor}` : null,
         backgroundColor: item.dominantColor,
         zIndex: zIndex.interpolate(t => Math.round(t)),
         width: width.interpolate(t => t),
