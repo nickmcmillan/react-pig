@@ -155,10 +155,16 @@ export default class Pig extends React.Component {
       item={item}
       gridGap={this.settings.gridGap}
       getUrl={this.getUrl}
-      handleClick={itemUrl => {
+      handleClick={item => {
+        // if an image is already the width of the container, don't expand it on click
+        if (item.style.width >= this.containerWidth) {
+          this.setState({ activeCellUrl: null })
+          return
+        }
+        
         this.setState({
           // if cell is already active, deactivate it
-          activeCellUrl: itemUrl !== this.state.activeCellUrl ? itemUrl : null
+          activeCellUrl: item.url !== this.state.activeCellUrl ? item.url : null
         })
       }}
       activeCellUrl={this.state.activeCellUrl}
