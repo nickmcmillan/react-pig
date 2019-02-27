@@ -1,4 +1,4 @@
-export default ({ item, windowHeight, settings, containerWidth }) => {
+export default ({ item, windowHeight, settings, containerWidth, containerOffsetTop }) => {
   // When expanded, portrait and Landscape images are treated differently
   const isImgPortrait = item.aspectRatio <= 1
   // Based on the window height, calculate the max image width
@@ -31,7 +31,7 @@ export default ({ item, windowHeight, settings, containerWidth }) => {
 
   // calculate the offset position in the center of the screen
   const offsetX = (containerWidth / 2) - (calcWidth / 2)
-  const offsetY = scrollY + (windowHeight / 2) - (calcHeight / 2)
+  const offsetY = window.scrollY + (windowHeight / 2) - (calcHeight / 2) - containerOffsetTop
 
   return { calcWidth, calcHeight, offsetX, offsetY }
 }

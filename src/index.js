@@ -102,6 +102,7 @@ export default class Pig extends React.Component {
     this.setRenderedItems(this.imageData)
     this.container.style.height = this.totalHeight + 'px' // set the container height again based on new layout
     this.containerWidth = this.container.offsetWidth
+    this.containerOffsetTop = this.container.offsetTop
     this.windowHeight = window.innerHeight
   }
 
@@ -159,6 +160,7 @@ export default class Pig extends React.Component {
       key={item.url}
       windowHeight={this.windowHeight}
       containerWidth={this.containerWidth}
+      containerOffsetTop={this.containerOffsetTop}
       item={item}
       gridGap={this.settings.gridGap}
       getUrl={this.getUrl}

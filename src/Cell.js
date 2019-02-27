@@ -7,12 +7,21 @@ import styles from './styles.css'
 
 const thumbnailSize = 10 // Height in px. Keeping it low seeing as it gets blurred anyway with a css filter
 
-const Cell = React.memo(function Cell({ item, containerWidth, getUrl, activeCellUrl, handleClick, windowHeight, settings }) {
+const Cell = React.memo(function Cell({
+  item,
+  containerWidth,
+  containerOffsetTop,
+  getUrl,
+  activeCellUrl,
+  handleClick,
+  windowHeight,
+  settings
+}) {
 
   const isExpanded = activeCellUrl === item.url
   const [isFullSizeLoaded, setFullSizeLoaded] = useState(false)
 
-  const { calcWidth, calcHeight, offsetX, offsetY } = getCellMeasurements({ item, windowHeight, settings, containerWidth })
+  const { calcWidth, calcHeight, offsetX, offsetY } = getCellMeasurements({ item, windowHeight, settings, containerWidth, containerOffsetTop })
 
   // gridPosition is what has been set by the grid layout logic (in the parent component)
   const gridPosition = `translate3d(${item.style.translateX}px, ${item.style.translateY}px, 0)`
@@ -41,7 +50,6 @@ const Cell = React.memo(function Cell({ item, containerWidth, getUrl, activeCell
         transform: transform.interpolate(t => t)
       }}
     >
-
       <img
         className={`${styles.pigImg} ${styles.pigThumbnail}${isFullSizeLoaded ? ` ${styles.pigThumbnailLoaded}` : ''}`}
         src={getUrl(item.url, thumbnailSize)}
@@ -61,8 +69,6 @@ const Cell = React.memo(function Cell({ item, containerWidth, getUrl, activeCell
           alt=""
         />
       )}
-
-      
     </animated.button>
   )
 })
