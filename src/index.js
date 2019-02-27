@@ -26,8 +26,15 @@ export default class Pig extends React.Component {
     this.imageData = props.imageData
     // do sorting
     if (props.sortByDate) this.imageData = sortByDate(this.imageData)
+
     // do grouping
-    if (props.groupByDate) this.imageData = groupByDate(this.imageData)
+    if (props.groupByDate) {
+      if (this.imageData[0].items) {
+        console.warn('Data appears to be grouped already')
+      } else {
+        this.imageData = groupByDate(this.imageData)
+      }
+    }
 
     this.state = {
       renderedItems: [],

@@ -1,5 +1,5 @@
 // group into day-month-year
-export default inputArr => {
+const groupByDate = (inputArr) => {
   const monthGroups = inputArr.reduce((groups, item) => {
     let formattedDate = ''
 
@@ -37,3 +37,6 @@ export default inputArr => {
 
   return groupArrays
 }
+
+// using old syntax because this function is also used by node
+module.exports = groupByDate
