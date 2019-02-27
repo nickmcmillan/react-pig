@@ -9,7 +9,7 @@ export default ({ item, windowHeight, settings, containerWidth }) => {
       if (widthDerivedFromMaxWindowHeight > containerWidth) {
         // 1. If image is portrait and when expanded it is too wide to fit in the container width, 
         // return containerWidth (basically a limiter)
-        return containerWidth
+        return containerWidth - settings.gridGap * 2
       } else {
         // 2. If image is portrait and when expanded it fits within the container
         return widthDerivedFromMaxWindowHeight
