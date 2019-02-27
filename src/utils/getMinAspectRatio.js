@@ -13,7 +13,7 @@
   * @returns {Number} The minimum aspect ratio at this window width.
   */
 export default function(containerWidth) {
-  if (containerWidth <= 800) return 2
+  if (containerWidth <= 800) return 1.5
   if (containerWidth <= 1280) return 3
   if (containerWidth <= 1920) return 4
   return 5
