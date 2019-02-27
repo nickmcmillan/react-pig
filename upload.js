@@ -117,7 +117,7 @@ recursive(localImgFolder, async (err, files) => {
       const folderName = file.split('/')[1]
       const breakChar = folderName.lastIndexOf(',')
       
-      // if the file is in the root on the source folder, set location and date to empty strings.
+      // if the file is in the root on the source folder, set location and date to null
       const isRoot = file.split('/').length === 2
       const location = !isRoot ? folderName.substring(0, breakChar) : null
       const date = !isRoot ? folderName.substring(breakChar + 1).trim() : null
