@@ -1,24 +1,22 @@
-import React, { Component } from 'react'
+import React from 'react'
 import Pig from 'pig-react'
-import imageData from './imageData.json'
+import imageData from './imageData-grouped.json'
 
-class App extends Component {
-  render() {
-    return (
-      <div className="container">
-        <Pig
-          imageData={imageData}
-          gridGap={10}
-          bgColor="#f8faff"
-          groupGapLg={50}
-          groupGapSm={20}
-          breakpoint={800}
-          sortByDate
-          groupByDate
-        />
-      </div>
-    )
-  }
-}
+const App = () => (
+  <main className="main">
+    <h1>Nick &amp; Tess in Amsterdam</h1>
+    <Pig
+      imageData={imageData}
+      gridGap={8}
+      bgColor="hsla(211, 50%, 98%)"
+
+      groupGapLg={50}
+      groupGapSm={20}
+      breakpoint={800}
+      // sortByDate
+      groupByDate
+    />
+  </main>
+)
 
 export default App
