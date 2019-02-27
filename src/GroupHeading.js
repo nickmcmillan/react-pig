@@ -16,16 +16,16 @@ export default ({
     }}
   >
     <div
-      className={styles.headerInner}
+      className={`${styles.headerInner} pig-header`}
       style={{
         backgroundColor: settings.bgColor,
         zIndex: activeCellUrl ? 1 : 2,
       }}
     >
-      <span className={styles.description}>
+      <span className={`${styles.description} pig-header_description`}>
         {group.description}
       </span>
-      <span className={styles.date}>
+      <span className={`${styles.date} pig-header_date`}>
         {group.date}
       </span>
     </div>
