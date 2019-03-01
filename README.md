@@ -63,6 +63,9 @@ class App extends Component {
         sortByDate // Boolean. Optional. Sorts descending by 'date' value
         groupByDate // Boolean. Optional. Groups images by 'date' value. And uses the first 'location' in the group for the heading text.
         gridGap={10} // Integer. Optional. Defaults to 8
+        expandedSize={1600} // Integer. Optional. Expanded image will be loaded in that size. Defaults to 1000
+        thumbnailSize={25} // Integer. Optional. Thumbnail image will be loaded in that size. Defaults to 10
+        sortFunc={(a, b) => a.imageOrder > b.imageOrder} // Function. Optional. Used for sorting images f.ex. if you add custom fields to the json file
         bgColor="#fff" // String. Optional. Used for outlines when image is expanded, and for group headings
         getUrl={(url, pxHeight) => {
           // Pig calls this function every time it needs to fetch an image.

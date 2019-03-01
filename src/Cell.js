@@ -4,7 +4,6 @@ import { useSpring, animated } from 'react-spring'
 import getImageHeight from './utils/getImageHeight'
 import getCellMeasurements from './utils/getCellMeasurements'
 import styles from './styles.css'
-const defaultThumbnailSize = 10 // Height in px. Keeping it low seeing as it gets blurred anyway with a css filter
 
 const Cell = React.memo(function Cell({
   item,
@@ -14,7 +13,7 @@ const Cell = React.memo(function Cell({
   activeCellUrl,
   handleClick,
   windowHeight,
-  settings,
+  settings
 }) {
 
   const isExpanded = activeCellUrl === item.url
@@ -51,7 +50,7 @@ const Cell = React.memo(function Cell({
     >
       <img
         className={`${styles.pigImg} ${styles.pigThumbnail}${isFullSizeLoaded ? ` ${styles.pigThumbnailLoaded}` : ''}`}
-        src={getUrl(item.url, settings.thumbnailSize || defaultThumbnailSize)}
+        src={getUrl(item.url, settings.thumbnailSize)}
         alt=""
       />
       <img
@@ -78,5 +77,5 @@ Cell.propTypes = {
   item: PropTypes.object.isRequired,
   containerWidth: PropTypes.number,
   settings: PropTypes.object.isRequired,
-  getUrl: PropTypes.func
+  getUrl: PropTypes.func,
 }

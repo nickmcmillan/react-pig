@@ -23,9 +23,9 @@ export default class Pig extends React.Component {
     // if getUrl has been provided as a prop, use it. otherwise use the default getUrl from /utils
     this.getUrl = props.getUrl || getUrl
 
-    // if sortFunc has been provided as a prop, use it, otherwise sort newest to old, by birthTime
     this.imageData = props.imageData
-    // do sorting
+
+    // if sortFunc has been provided as a prop, use it
     if (props.sortFunc) this.imageData.sort(props.sortFunc)
     else if (props.sortByDate) this.imageData = sortByDate(this.imageData)
 
@@ -59,7 +59,7 @@ export default class Pig extends React.Component {
       primaryImageBufferHeight: props.primaryImageBufferHeight || 2500,
       secondaryImageBufferHeight: props.secondaryImageBufferHeight || 100,
       expandedSize: props.expandedSize || 1000,
-      thumbnailSize: props.thumbnailSize || 10,
+      thumbnailSize: props.thumbnailSize || 10, // Height in px. Keeping it low seeing as it gets blurred anyway with a css filter
 
       // settings specific to groups
       groupByDate: props.groupByDate || false,
@@ -100,8 +100,6 @@ export default class Pig extends React.Component {
       if (this.state.activeCellUrl) this.setState({ activeCellUrl: null })
     })
   }
-
-  sortImages = (a, b) => new Date(b.birthTime) - new Date(a.birthTime)
 
   onResize = () => {
     this.imageData = this.getUpdatedImageLayout()
