@@ -24,8 +24,10 @@ export default class Pig extends React.Component {
     this.getUrl = props.getUrl || getUrl
 
     this.imageData = props.imageData
-    // do sorting
-    if (props.sortByDate) this.imageData = sortByDate(this.imageData)
+
+    // if sortFunc has been provided as a prop, use it
+    if (props.sortFunc) this.imageData.sort(props.sortFunc)
+    else if (props.sortByDate) this.imageData = sortByDate(this.imageData)
 
     // do grouping
     if (props.groupByDate) {
@@ -56,6 +58,8 @@ export default class Pig extends React.Component {
       bgColor: props.bgColor || '#fff',
       primaryImageBufferHeight: props.primaryImageBufferHeight || 2500,
       secondaryImageBufferHeight: props.secondaryImageBufferHeight || 100,
+      expandedSize: props.expandedSize || 1000,
+      thumbnailSize: props.thumbnailSize || 10, // Height in px. Keeping it low seeing as it gets blurred anyway with a css filter
 
       // settings specific to groups
       groupByDate: props.groupByDate || false,
@@ -120,7 +124,7 @@ export default class Pig extends React.Component {
         imageData: this.imageData,
         settings: this.settings,
       })
-  
+
       this.totalHeight = newTotalHeight
       return imageData
     } else {
@@ -149,7 +153,7 @@ export default class Pig extends React.Component {
     this.imageData = this.getUpdatedImageLayout()
     this.setRenderedItems(this.imageData)
   }
-  
+
   componentWillUnmount() {
     window.removeEventListener('scroll', this.throttledScroll)
     window.removeEventListener('resize', this.debouncedResize)
@@ -170,7 +174,7 @@ export default class Pig extends React.Component {
           this.setState({ activeCellUrl: null })
           return
         }
-        
+
         this.setState({
           // if cell is already active, deactivate it
           activeCellUrl: item.url !== this.state.activeCellUrl ? item.url : null
@@ -178,6 +182,7 @@ export default class Pig extends React.Component {
       }}
       activeCellUrl={this.state.activeCellUrl}
       settings={this.settings}
+      thumbnailSize={this.props.thumbnailSize}
     />
   )
 
@@ -216,4 +221,7 @@ Pig.propTypes = {
   groupGapSm: PropTypes.number,
   groupGapLg: PropTypes.number,
   breakpoint: PropTypes.number,
+  sortFunc: PropTypes.func,
+  expandedSize: PropTypes.number,
+  thumbnailSize: PropTypes.number,
 }
