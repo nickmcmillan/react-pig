@@ -1,10 +1,9 @@
 import React from 'react'
 import Pig from 'pig-react'
-import imageData from './imageData-grouped.json'
+import imageData from './imageData.json'
 
 const App = () => (
   <main className="main">
-    <h1>Nick &amp; Tess in Amsterdam</h1>
     <Pig
       imageData={imageData}
       gridGap={8}
