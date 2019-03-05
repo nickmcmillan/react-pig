@@ -90,12 +90,12 @@ export default App
 
 
 ## Todo: 
-- [ ] Dont expand if expanded size is less than container width
 - [ ] Fix group heading text alignment
 - [ ] Possibly provide a value to group by?
-- [x] expanded cell outline based on gridgap
+- [x] Dont expand if expanded size is less than container width
+- [x] expanded tile outline based on gridgap
 - [x] Group by months
-- [x] bug: resizing isn't setting width correctly in cell
+- [x] bug: resizing isn't setting width correctly in tile
 - [x] Use resize observer instead of scroll/resize listeners
 - [x] Convert this package into a module
 - [x] Proptype checks

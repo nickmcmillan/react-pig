@@ -2,24 +2,24 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { useSpring, animated } from 'react-spring'
 import getImageHeight from '../../utils/getImageHeight'
-import getCellMeasurements from '../../utils/getCellMeasurements'
+import getTileMeasurements from '../../utils/getTileMeasurements'
 import styles from './styles.css'
 
-const Cell = React.memo(function Cell({
+const Tile = React.memo(function Tile({
   item,
   containerWidth,
   containerOffsetTop,
   getUrl,
-  activeCellUrl,
+  activeTileUrl,
   handleClick,
   windowHeight,
   settings
 }) {
 
-  const isExpanded = activeCellUrl === item.url
+  const isExpanded = activeTileUrl === item.url
   const [isFullSizeLoaded, setFullSizeLoaded] = useState(false)
 
-  const { calcWidth, calcHeight, offsetX, offsetY } = getCellMeasurements({ item, windowHeight, settings, containerWidth, containerOffsetTop })
+  const { calcWidth, calcHeight, offsetX, offsetY } = getTileMeasurements({ item, windowHeight, settings, containerWidth, containerOffsetTop })
 
   // gridPosition is what has been set by the grid layout logic (in the parent component)
   const gridPosition = `translate3d(${item.style.translateX}px, ${item.style.translateY}px, 0)`
@@ -71,9 +71,9 @@ const Cell = React.memo(function Cell({
   )
 })
 
-export default Cell
+export default Tile
 
-Cell.propTypes = {
+Tile.propTypes = {
   item: PropTypes.object.isRequired,
   containerWidth: PropTypes.number,
   settings: PropTypes.object.isRequired,

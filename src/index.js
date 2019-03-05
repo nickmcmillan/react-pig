@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 import debounce from 'lodash.debounce'
 import throttle from 'lodash.throttle'
 
-import Cell from './components/Cell/Cell'
-import GroupHeading from './components/GroupHeading/GroupHeading'
+import Tile from './components/Tile/Tile'
+import GroupHeader from './components/GroupHeader/GroupHeader'
 import calcRenderableItems from './calcRenderableItems'
 import computeLayout from './computeLayout'
 import computeLayoutGroups from './computeLayoutGroups'
@@ -40,7 +40,7 @@ export default class Pig extends React.Component {
 
     this.state = {
       renderedItems: [],
-      activeCellUrl: null
+      activeTileUrl: null
     }
 
     this.windowHeight = window.innerHeight,
@@ -96,8 +96,8 @@ export default class Pig extends React.Component {
 
     window.requestAnimationFrame(() => {
       this.setRenderedItems(this.imageData)
-      // dismiss any active cell
-      if (this.state.activeCellUrl) this.setState({ activeCellUrl: null })
+      // dismiss any active Tile
+      if (this.state.activeTileUrl) this.setState({ activeTileUrl: null })
     })
   }
 
@@ -159,8 +159,8 @@ export default class Pig extends React.Component {
     window.removeEventListener('resize', this.debouncedResize)
   }
 
-  renderCell = item => (
-    <Cell
+  renderTile = item => (
+    <Tile
       key={item.url}
       windowHeight={this.windowHeight}
       containerWidth={this.containerWidth}
@@ -171,16 +171,16 @@ export default class Pig extends React.Component {
       handleClick={item => {
         // if an image is already the width of the container, don't expand it on click
         if (item.style.width >= this.containerWidth) {
-          this.setState({ activeCellUrl: null })
+          this.setState({ activeTileUrl: null })
           return
         }
 
         this.setState({
-          // if cell is already active, deactivate it
-          activeCellUrl: item.url !== this.state.activeCellUrl ? item.url : null
+          // if Tile is already active, deactivate it
+          activeTileUrl: item.url !== this.state.activeTileUrl ? item.url : null
         })
       }}
-      activeCellUrl={this.state.activeCellUrl}
+      activeTileUrl={this.state.activeTileUrl}
       settings={this.settings}
       thumbnailSize={this.props.thumbnailSize}
     />
@@ -188,12 +188,12 @@ export default class Pig extends React.Component {
 
   renderGroup = group => (
     <React.Fragment key={group.date}>
-      <GroupHeading settings={this.settings} group={group} activeCellUrl={this.state.activeCellUrl} />
-      {group.items.map(item => this.renderCell(item))}
+      <GroupHeader settings={this.settings} group={group} activeTileUrl={this.state.activeTileUrl} />
+      {group.items.map(item => this.renderTile(item))}
     </React.Fragment>
   )
 
-  renderFlat = item => this.renderCell(item)
+  renderFlat = item => this.renderTile(item)
 
   render() {
     return (
