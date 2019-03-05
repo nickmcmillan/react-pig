@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { useSpring, animated } from 'react-spring'
-import getImageHeight from './utils/getImageHeight'
-import getCellMeasurements from './utils/getCellMeasurements'
+import getImageHeight from '../../utils/getImageHeight'
+import getCellMeasurements from '../../utils/getCellMeasurements'
 import styles from './styles.css'
 
 const Cell = React.memo(function Cell({
