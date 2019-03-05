@@ -9,19 +9,19 @@ export default ({ item, windowHeight, settings, containerWidth, containerOffsetT
       if (widthDerivedFromMaxWindowHeight > containerWidth) {
         // 1. If image is portrait and when expanded it is too wide to fit in the container width, 
         // return containerWidth (basically a limiter)
-        return containerWidth - settings.gridGap * 2
+        return containerWidth
       } else {
         // 2. If image is portrait and when expanded it fits within the container
         return widthDerivedFromMaxWindowHeight
       }
     } else {
       if ((containerWidth / item.aspectRatio) >= windowHeight) {
-        // 3. If it's landscape, and if its too tall to fit in the viewport height, 
+        // 3. If it's landscape, and if its too tall to fit in the windowHeight,
         // return the widthDerivedFromMaxWindowHeight
-        return widthDerivedFromMaxWindowHeight - settings.gridGap * 2
+        return widthDerivedFromMaxWindowHeight
       } else {
         // 4. If it's landscape and when expanded fits within the container, return containerWidth
-        return containerWidth - settings.gridGap * 2
+        return containerWidth
       }
     }
   })()
