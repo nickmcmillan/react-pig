@@ -37,26 +37,16 @@
 
 .pigFull {
   opacity: 0;
-  /* object-fit: contain; */
-  transition: opacity 300ms linear;
+  transition: opacity 150ms linear;
   will-change: opacity;
 }
 
 .pigThumbnail {
-  -webkit-filter: blur(10px);
-  filter: blur(10px);
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  transition: opacity 300ms linear, visibility 300ms linear;
-  will-change: opacity, visibility;
+  -webkit-filter: blur(8px);
+  filter: blur(8px);
 }
 
 .pigThumbnailLoaded {
-  opacity: 0;
-  visibility: hidden;
   /* just in case it might help performance */
   filter: none;
 }
