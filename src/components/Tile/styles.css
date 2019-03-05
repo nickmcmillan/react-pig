@@ -43,8 +43,8 @@
 }
 
 .pigThumbnail {
-  -webkit-filter: blur(15px);
-  filter: blur(15px);
+  -webkit-filter: blur(10px);
+  filter: blur(10px);
   position: absolute;
   left: 0;
   top: 0;
