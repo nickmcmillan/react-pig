@@ -1,8 +1,22 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-
-import App from './App'
+import Pig from 'pig-react'
+import imageData from './imageData.json'
 
 import './base.css'
 
-ReactDOM.render(<App />, document.getElementById('root'))
+ReactDOM.render(
+  <main className="main">
+    <Pig
+      imageData={imageData}
+      gridGap={8}
+      bgColor="hsla(211, 50%, 98%)"
+
+      groupGapLg={50}
+      groupGapSm={20}
+      breakpoint={800}
+      // sortByDate
+      groupByDate
+    />
+  </main>
+, document.getElementById('root'))
