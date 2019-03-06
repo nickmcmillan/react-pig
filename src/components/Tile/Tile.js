@@ -13,7 +13,8 @@ const Tile = React.memo(function Tile({
   activeTileUrl,
   handleClick,
   windowHeight,
-  settings
+  scrollSpeed,
+  settings,
 }) {
 
   const isExpanded = activeTileUrl === item.url
@@ -48,17 +49,21 @@ const Tile = React.memo(function Tile({
         transform: transform.interpolate(t => t)
       }}
     >
-      <img
-        className={`${styles.pigImg} ${styles.pigThumbnail}${isFullSizeLoaded ? ` ${styles.pigThumbnailLoaded}` : ''}`}
-        src={getUrl(item.url, settings.thumbnailSize)}
-        alt=""
-      />
-      <img
-        className={`${styles.pigImg} ${styles.pigFull}${isFullSizeLoaded ? ` ${styles.pigFullLoaded}` : ''}`}
-        src={getUrl(item.url, getImageHeight(containerWidth))}
-        alt=""
-        onLoad={() => setFullSizeLoaded(true)}
-      />
+      {(scrollSpeed === 0 || scrollSpeed === 1) &&
+        <img
+          className={`${styles.pigImg} ${styles.pigThumbnail}${isFullSizeLoaded ? ` ${styles.pigThumbnailLoaded}` : ''}`}
+          src={getUrl(item.url, settings.thumbnailSize)}
+          alt=""
+        />
+      }
+      {(scrollSpeed === 0 || scrollSpeed === 1) &&
+        <img
+          className={`${styles.pigImg} ${styles.pigFull}${isFullSizeLoaded ? ` ${styles.pigFullLoaded}` : ''}`}
+          src={getUrl(item.url, getImageHeight(containerWidth))}
+          alt=""
+          onLoad={() => setFullSizeLoaded(true)}
+        />
+      }
 
       {isExpanded && (
         <img
