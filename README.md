@@ -92,6 +92,7 @@ export default App
 ## Todo: 
 - [ ] Fix group heading text alignment
 - [ ] Possibly provide a value to group by?
+- [x] Conditional rendering based on users scroll speed
 - [x] Dont expand if expanded size is less than container width
 - [x] expanded tile outline based on gridgap
 - [x] Group by months
