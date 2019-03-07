@@ -11,8 +11,11 @@ import computeLayoutGroups from './computeLayoutGroups'
 import getUrl from './utils/getUrl'
 import sortByDate from './utils/sortByDate'
 import groupByDate from './utils/groupByDate'
+import getScrollSpeed from './utils/getScrollSpeed'
 
 import styles from './styles.css'
+
+
 
 export default class Pig extends React.Component {
   constructor(props) {
@@ -40,9 +43,11 @@ export default class Pig extends React.Component {
 
     this.state = {
       renderedItems: [],
+      scrollSpeed: 'slow',
       activeTileUrl: null
     }
 
+    this.scrollThrottleMs = 200
     this.windowHeight = window.innerHeight,
     this.containerOffsetTop = null
     this.totalHeight = 0
@@ -51,6 +56,7 @@ export default class Pig extends React.Component {
     this.titleRef = React.createRef()
     this.minAspectRatio = null
     this.latestYOffset = 0
+    this.previousYOffset = 0
     this.scrollDirection = 'down'
 
     this.settings = {
@@ -68,7 +74,7 @@ export default class Pig extends React.Component {
       groupGapLg: props.groupGapLg || 50,
     }
 
-    this.throttledScroll = throttle(this.onScroll, 200)
+    this.throttledScroll = throttle(this.onScroll, this.scrollThrottleMs)
     this.debouncedResize = debounce(this.onResize, 500)
   }
 
@@ -89,13 +95,19 @@ export default class Pig extends React.Component {
   }
 
   onScroll = () => {
-    // Compute the scroll direction using the latestYOffset and the previousYOffset
     this.previousYOffset = this.latestYOffset || window.pageYOffset
     this.latestYOffset = window.pageYOffset
     this.scrollDirection = (this.latestYOffset > this.previousYOffset) ? 'down' : 'up'
 
     window.requestAnimationFrame(() => {
       this.setRenderedItems(this.imageData)
+
+      // measure users scrolling speed and set it to state, used for conditional tile rendering
+      const scrollSpeed = getScrollSpeed(this.latestYOffset, this.scrollThrottleMs, scrollSpeed => {
+        this.setState({ scrollSpeed }) // scroll idle callback
+      })
+      this.setState({ scrollSpeed })
+      
       // dismiss any active Tile
       if (this.state.activeTileUrl) this.setState({ activeTileUrl: null })
     })
@@ -183,6 +195,7 @@ export default class Pig extends React.Component {
       activeTileUrl={this.state.activeTileUrl}
       settings={this.settings}
       thumbnailSize={this.props.thumbnailSize}
+      scrollSpeed={this.state.scrollSpeed}
     />
   )
 
