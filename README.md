@@ -4,8 +4,9 @@
 
 [View Demo](https://pigreact.netlify.com/)
 
-[![NPM](https://img.shields.io/npm/v/pig-react.svg)](https://www.npmjs.com/package/pig-react) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
-
+[![NPM](https://img.shields.io/npm/v/pig-react.svg?style=flat-square)](https://www.npmjs.com/package/pig-react)
+![npm bundle size](https://img.shields.io/bundlephobia/min/pig-react.svg?style=flat-square)
+[![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg?style=flat-square)](https://standardjs.com)
 
 A re-implementation of @schlosser's [pig.js](https://github.com/schlosser/pig.js/) in React.
 
