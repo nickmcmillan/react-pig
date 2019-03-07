@@ -37,7 +37,6 @@ const Tile = React.memo(function Tile({
 
   return (
     <animated.button
-      // id={item.id.replace('/', '-')} // replace slashes just in case, because we use the id as an anchor
       className={`${styles.pigBtn}${isExpanded ? ` ${styles.pigBtnActive}` : ''}`}
       onClick={() => handleClick(item)}
       style={{
@@ -49,14 +48,16 @@ const Tile = React.memo(function Tile({
         transform: transform.interpolate(t => t)
       }}
     >
-      {(scrollSpeed === 0 || scrollSpeed === 1) &&
+      {scrollSpeed === 'medium' &&
+        // LQIP
         <img
           className={`${styles.pigImg} ${styles.pigThumbnail}${isFullSizeLoaded ? ` ${styles.pigThumbnailLoaded}` : ''}`}
           src={getUrl(item.url, settings.thumbnailSize)}
           alt=""
         />
       }
-      {(scrollSpeed === 0 || scrollSpeed === 1) &&
+      {(scrollSpeed === 'slow' || scrollSpeed === 'medium') &&
+        // grid image
         <img
           className={`${styles.pigImg} ${styles.pigFull}${isFullSizeLoaded ? ` ${styles.pigFullLoaded}` : ''}`}
           src={getUrl(item.url, getImageHeight(containerWidth))}
@@ -66,6 +67,7 @@ const Tile = React.memo(function Tile({
       }
 
       {isExpanded && (
+        // full size expanded image
         <img
           className={styles.pigImg}
           src={getUrl(item.url, settings.expandedSize)}

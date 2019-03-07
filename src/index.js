@@ -43,7 +43,7 @@ export default class Pig extends React.Component {
 
     this.state = {
       renderedItems: [],
-      scrollSpeed: 0,
+      scrollSpeed: 'slow',
       activeTileUrl: null
     }
 
@@ -95,26 +95,18 @@ export default class Pig extends React.Component {
   }
 
   onScroll = () => {
-    // Compute the scroll direction using the latestYOffset and the previousYOffset
     this.previousYOffset = this.latestYOffset || window.pageYOffset
     this.latestYOffset = window.pageYOffset
     this.scrollDirection = (this.latestYOffset > this.previousYOffset) ? 'down' : 'up'
 
     window.requestAnimationFrame(() => {
       this.setRenderedItems(this.imageData)
-      const scrollSpeed = getScrollSpeed(this.latestYOffset, this.scrollThrottleMs)
-      if (scrollSpeed < 800) {
-        this.setState({ scrollSpeed: 0 })
-      } else if (scrollSpeed < 2000) {
-        this.setState({ scrollSpeed: 1 })
-      } else {
-        this.setState({ scrollSpeed: 2 })
-      }
-      console.log(this.state.scrollSpeed)
-      
-    
-      // slow < 800
-      // too fast > 1500
+
+      // measure users scrolling speed and set it to state, used for conditional tile rendering
+      const scrollSpeed = getScrollSpeed(this.latestYOffset, this.scrollThrottleMs, scrollSpeed => {
+        this.setState({ scrollSpeed }) // scroll idle callback
+      })
+      this.setState({ scrollSpeed })
       
       // dismiss any active Tile
       if (this.state.activeTileUrl) this.setState({ activeTileUrl: null })
