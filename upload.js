@@ -1,59 +1,59 @@
 /* eslint camelcase: 0 */
-
 require('dotenv').config()
 const argv = require('minimist')(process.argv.slice(2))
 const cloudinary = require('cloudinary')
 const fs = require('fs')
 const _cliProgress = require('cli-progress')
-const recursive = require("recursive-readdir");
+const recursive = require('recursive-readdir')
+const sharp = require('sharp')
 
-// node upload.js --in=./imgs/ --out=./imageData.json --cloudinaryFolder=whatever
+// node upload.js --in=./_newbatch/ --out=./imageData-new.json --cloudinaryFolder=mcfrench2
 const localImgFolder = argv.in
 const outputJSONFileName = argv.out || './imageData.json'
 const cloudinaryFolder = argv.cloudinaryFolder || ''
-// const author = argv.a || ''
 
 if (!localImgFolder) throw new Error('Missing --in arg')
 
 const cloud_name = process.env.cloud_name
 const api_key = process.env.api_key
 const api_secret = process.env.api_secret
-const cloudinaryUploadFileSizeLimit = 10485760 // Cloudinary's free plan rejects images larger than this
+
+const MAX_IMAGE_DIMENSION = 1920 // width or height. set a limit so you don't upload images too large and risk up your storage limit
 
 cloudinary.config({ cloud_name, api_key, api_secret })
 
-const uploadToCloudinary = (fileName, { location, date, birthTime }) => new Promise(async (resolve, reject) => {
+const uploadToCloudinary = (fileBuffer, { location, date, birthTime }) => new Promise(async (resolve, reject) => {
   // Cloudinary only allows strings in its context
   location = location ? location.toString() : ''
   date = date ? date.toString() : ''
   birthTime = birthTime ? birthTime.toString() : ''
 
   try {
-    await cloudinary.v2.uploader.upload(fileName, {
+    await cloudinary.v2.uploader.upload_stream({
       colors: true,
       exif: true,
       image_metadata: true,
-      overwrite: true,
+      overwrite: false,
       folder: cloudinaryFolder,
       // context is cloudinary's way of storing meta data about an image
       context: {
-        // author,
         location,
         date,
         birthTime,
       },
       transformation: [
-        { width: 1920, height: 1920, crop: 'limit' },
+        { width: MAX_IMAGE_DIMENSION, height: MAX_IMAGE_DIMENSION, crop: 'limit' },
       ],
       eager: [
-        { width: 1920, height: 1920, crop: 'limit' },
+        { width: MAX_IMAGE_DIMENSION, height: MAX_IMAGE_DIMENSION, crop: 'limit' },
       ]
     }, function (err, result) {
       if (err) {
         reject(err)
       }
+      
       resolve(result)
-    })
+    }).end(fileBuffer)
   } catch (err) {
     reject(err)
   }
@@ -95,16 +95,7 @@ recursive(localImgFolder, async (err, files) => {
     progressBarVal += 1
     progressBar.update(progressBarVal)
     // cloudinary doesnt store birthTime data, but we need this. Its useful to know when an image was created.
-    const { size, birthtime: birthTime } = await getFileData(file)
-
-    if (size > cloudinaryUploadFileSizeLimit) {
-      console.warn(`❌  ${file} exceeds Cloudinary's upload limit:`, cloudinaryUploadFileSizeLimit, 'Skipping file')
-      failedImgs.push({
-        file,
-        reason: 'Exceeded filesize limit'
-      })
-      continue
-    }
+    const { birthtime: birthTime } = await getFileData(file)
 
     try {
       // Possible folder name formats;
@@ -123,7 +114,14 @@ recursive(localImgFolder, async (err, files) => {
       const date = !isRoot ? folderName.substring(breakChar + 1).trim() : null
       
       // this uploads the file and returns all of its juicy metadata
-      const uploadedFileData = await uploadToCloudinary(file, { location, date, birthTime })
+
+      
+      const fileBuffer = await sharp(file)
+        .resize(MAX_IMAGE_DIMENSION)
+        .toBuffer()
+      
+      const uploadedFileData = await uploadToCloudinary(fileBuffer, { location, date, birthTime })
+      
 
       if (uploadedFileData.err) {
         console.warn('❌  Error from Cloudinary. Skipping file:', err)
@@ -151,8 +149,7 @@ recursive(localImgFolder, async (err, files) => {
       const url = `https://res.cloudinary.com/${cloud_name}/image/upload/h_{{HEIGHT}}/v${version}/${public_id}.${format}`
 
       const fileData = {
-        id: public_id.split('/')[1],
-        // author,
+        id: public_id,
         dominantColor: uploadedFileData.colors[0][0],
         url,
         location,
