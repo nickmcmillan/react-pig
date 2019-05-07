@@ -1,6 +1,6 @@
 {
-  "short_name": "pig-react",
-  "name": "pig-react",
+  "short_name": "react-pig",
+  "name": "react-pig",
   "start_url": "./index.html",
   "display": "standalone",
   "theme_color": "#000000",

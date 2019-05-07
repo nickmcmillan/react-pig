@@ -1,6 +1,6 @@
 {
-  "name": "pig-react-example",
-  "homepage": "https://nickmcmillan.github.io/pig-react",
+  "name": "react-pig-example",
+  "homepage": "https://nickmcmillan.github.io/react-pig",
   "version": "0.0.0",
   "license": "MIT",
   "private": true,
@@ -9,7 +9,7 @@
     "react": "link:../node_modules/react",
     "react-dom": "link:../node_modules/react-dom",
     "react-scripts": "^1.1.4",
-    "pig-react": "link:.."
+    "react-pig": "link:.."
   },
   "scripts": {
     "start": "react-scripts start",
