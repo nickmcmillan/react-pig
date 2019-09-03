@@ -14,11 +14,11 @@ Instead of hosting images locally I've used Cloudinary - an image hosting provid
 
 In addition each image is now clickable and will expand to the center of the screen. It uses React Spring to handle the transition.
 
-# React-pig-utils
+## React-pig-utils
 React Pig requires that a specific JSON format be supplied. So this project comes with a companion repo which provides utilities for doing that. Check it out here [react-pig-utils](https://github.com/nickmcmillan/react-pig-utils).
 
 
-# Example usage of react-pig
+## Example usage of react-pig
 
 ```
 yarn add react-pig
