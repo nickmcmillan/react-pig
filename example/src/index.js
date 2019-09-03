@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Pig from 'pig-react'
+import Pig from 'react-pig'
 import imageData from './imageData.json'
 
 import './base.css'
