@@ -18,7 +18,8 @@ const Tile = React.memo(function Tile({
 }) {
 
   const isExpanded = activeTileUrl === item.url
-  const [isFullSizeLoaded, setFullSizeLoaded] = useState(false)
+  const isVideo = item.url.includes('.mp4') || item.url.includes('.mov')
+  const [isFullSizeLoaded, setFullSizeLoaded] = useState(isVideo ? true : false)
 
   const { calcWidth, calcHeight, offsetX, offsetY } = getTileMeasurements({ item, windowHeight, settings, containerWidth, containerOffsetTop })
 
@@ -35,9 +36,11 @@ const Tile = React.memo(function Tile({
     config: { mass: 1.5, tension: 400, friction: 40 }
   })
 
+  
+
   return (
     <animated.button
-      className={`${styles.pigBtn}${isExpanded ? ` ${styles.pigBtnActive}` : ''}`}
+      className={`${styles.pigBtn}${isExpanded ? ` ${styles.pigBtnActive}` : ''} pig-btn`}
       onClick={() => handleClick(item)}
       style={{
         outline: isExpanded ? `${settings.gridGap}px solid ${settings.bgColor}` : null,
@@ -53,10 +56,13 @@ const Tile = React.memo(function Tile({
         <img
           className={`${styles.pigImg} ${styles.pigThumbnail}${isFullSizeLoaded ? ` ${styles.pigThumbnailLoaded}` : ''}`}
           src={getUrl(item.url, settings.thumbnailSize)}
+          loading="lazy"
+          width={item.style.width}
+          height={item.style.height}
           alt=""
         />
       }
-      {(scrollSpeed === 'slow' || scrollSpeed === 'medium') &&
+      {(scrollSpeed === 'slow' || scrollSpeed === 'medium') && !isVideo &&
         // grid image
         <img
           className={`${styles.pigImg} ${styles.pigFull}${isFullSizeLoaded ? ` ${styles.pigFullLoaded}` : ''}`}
@@ -66,12 +72,36 @@ const Tile = React.memo(function Tile({
         />
       }
 
-      {isExpanded && (
+      {(scrollSpeed === 'slow' || scrollSpeed === 'medium') && isVideo &&
+        <video
+          className={`${styles.pigImg} ${styles.pigThumbnail}${isFullSizeLoaded ? ` ${styles.pigThumbnailLoaded}` : ''}`}
+          src={getUrl(item.url, getImageHeight(containerWidth))}
+          onCanPlay={() => setFullSizeLoaded(true)}
+          autoPlay
+          muted
+          loop
+          playsInline
+        />
+      }
+
+      {isExpanded && !isVideo && (
         // full size expanded image
         <img
           className={styles.pigImg}
           src={getUrl(item.url, settings.expandedSize)}
           alt=""
+        />
+      )}
+      
+      {isExpanded && isVideo && (
+        // full size expanded video
+        <video
+          className={styles.pigImg}
+          src={getUrl(item.url, settings.expandedSize)}
+          autoPlay
+          muted
+          loop
+          playsInline
         />
       )}
     </animated.button>

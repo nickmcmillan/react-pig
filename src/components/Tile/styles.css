@@ -1,9 +1,8 @@
-
 .pigBtn {
   contain: strict;
-  overflow: hidden;
-  left: 0;
+  /* overflow: hidden; */
   position: absolute;
+  left: 0;
   top: 0;
   outline-style: solid;
   outline: 0;
@@ -22,6 +21,11 @@
   -moz-osx-font-smoothing: inherit;
   -webkit-appearance: none;
 }
+
+/* .pigBtn:hover,
+.pigBtn:focus {
+  outline: 6px solid yellow;
+} */
 
 .pigBtn:hover .caption,
 .pigBtn:focus .caption {

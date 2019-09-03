@@ -22,8 +22,8 @@ export default ({
         zIndex: activeTileUrl ? 1 : 2,
       }}
     >
-      <span className={`${styles.description} pig-header_description`}>
-        {group.description}
+      <span className={`${styles.location} pig-header_location`}>
+        {group.location}
       </span>
       <span className={`${styles.date} pig-header_date`}>
         {group.date}

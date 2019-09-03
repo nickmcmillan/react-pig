@@ -22,15 +22,15 @@ const groupByDate = (inputArr) => {
   }, {});
 
   const groupArrays = Object.keys(monthGroups).map((date) => {
-    // for description we're just gonna get the first item in the monthGroup which has a location
-    let description = ''
+    // for location we're just gonna get the first item in the monthGroup which has a location
+    let location = ''
     monthGroups[date].some(i => {
-      if (i.location) description = i.location
+      if (i.location) location = i.location
     })
 
     return {
       date,
-      description,
+      location,
       items: monthGroups[date]
     };
   });

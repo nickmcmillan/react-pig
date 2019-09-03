@@ -37,7 +37,7 @@ export default function ({
       arrOfGroups.push({
         items: filteredInGroup,
         date: g.date,
-        description: g.description,
+        location: g.location,
         groupTranslateY: g.groupTranslateY,
         height: g.height,
       })

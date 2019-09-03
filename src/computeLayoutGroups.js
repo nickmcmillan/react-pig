@@ -88,7 +88,7 @@ export default function ({
 
     tempGroupData.push({
       date: g.date,
-      description: g.description,
+      location: g.location,
       groupTranslateY: groupTranslateY,
       items: tempImgData,
       height: groupHeight + groupTitleHeight,
