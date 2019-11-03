@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import debounce from 'lodash.debounce'
 import throttle from 'lodash.throttle'
@@ -16,8 +16,7 @@ import getScrollSpeed from './utils/getScrollSpeed'
 import styles from './styles.css'
 
 
-
-export default class Pig extends React.Component {
+export default class Pig extends Component {
   constructor(props) {
     super(props)
 
@@ -32,12 +31,14 @@ export default class Pig extends React.Component {
     if (props.sortFunc) this.imageData.sort(props.sortFunc)
     else if (props.sortByDate) this.imageData = sortByDate(this.imageData)
 
-    // do grouping
+    // check grouping ability
     if (props.groupByDate) {
+      if (!this.imageData[0].items) {
+        console.error(`Data provided is not grouped yet. Please check the docs, you'll need to use groupify.js`)
+      }
+    } else {
       if (this.imageData[0].items) {
-        console.warn('Data appears to be grouped already')
-      } else {
-        this.imageData = groupByDate(this.imageData)
+        console.error(`Data provided is grouped, please include the groupByDate prop`)
       }
     }
 
@@ -47,7 +48,7 @@ export default class Pig extends React.Component {
       activeTileUrl: null
     }
 
-    this.scrollThrottleMs = 200
+    this.scrollThrottleMs = 300
     this.windowHeight = window.innerHeight,
     this.containerOffsetTop = null
     this.totalHeight = 0
@@ -60,18 +61,16 @@ export default class Pig extends React.Component {
     this.scrollDirection = 'down'
 
     this.settings = {
-      gridGap: props.gridGap || 8,
-      bgColor: props.bgColor || '#fff',
-      primaryImageBufferHeight: props.primaryImageBufferHeight || 2500,
-      secondaryImageBufferHeight: props.secondaryImageBufferHeight || 100,
-      expandedSize: props.expandedSize || 1000,
-      thumbnailSize: props.thumbnailSize || 10, // Height in px. Keeping it low seeing as it gets blurred anyway with a css filter
-
-      // settings specific to groups
-      groupByDate: props.groupByDate || false,
-      breakpoint: props.breakpoint || 800,
-      groupGapSm: props.groupGapSm || 50,
-      groupGapLg: props.groupGapLg || 50,
+      gridGap: props.gridGap,
+      bgColor: props.bgColor,
+      primaryImageBufferHeight: props.primaryImageBufferHeight,
+      secondaryImageBufferHeight: props.secondaryImageBufferHeight,
+      expandedSize: props.expandedSize,
+      thumbnailSize: props.thumbnailSize,
+      groupByDate: props.groupByDate,
+      breakpoint: props.breakpoint,
+      groupGapSm: props.groupGapSm,
+      groupGapLg: props.groupGapLg,
     }
 
     this.throttledScroll = throttle(this.onScroll, this.scrollThrottleMs)
@@ -174,6 +173,7 @@ export default class Pig extends React.Component {
   renderTile = item => (
     <Tile
       key={item.url}
+      useLqip={this.props.useLqip}
       windowHeight={this.windowHeight}
       containerWidth={this.containerWidth}
       containerOffsetTop={this.containerOffsetTop}
@@ -223,8 +223,24 @@ export default class Pig extends React.Component {
   }
 }
 
+Pig.defaultProps = {
+  useLqip: true,
+  primaryImageBufferHeight: 2500,
+  secondaryImageBufferHeight: 100,
+  expandedSize: 1000,
+  thumbnailSize: 20, // Height in px. Keeping it low seeing as it gets blurred anyway with a css filter
+  // settings specific to groups
+  groupByDate: false,
+  breakpoint: 800,
+  groupGapSm: 50,
+  groupGapLg: 50,
+  gridGap: 8,
+  bgColor: '#fff',
+}
+
 Pig.propTypes = {
   imageData: PropTypes.array.isRequired,
+  useLqip: PropTypes.bool,
   gridGap: PropTypes.number,
   getUrl: PropTypes.func,
   primaryImageBufferHeight: PropTypes.number,

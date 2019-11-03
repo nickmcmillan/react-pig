@@ -7,6 +7,7 @@ import styles from './styles.css'
 
 const Tile = React.memo(function Tile({
   item,
+  useLqip,
   containerWidth,
   containerOffsetTop,
   getUrl,
@@ -36,8 +37,6 @@ const Tile = React.memo(function Tile({
     config: { mass: 1.5, tension: 400, friction: 40 }
   })
 
-  
-
   return (
     <animated.button
       className={`${styles.pigBtn}${isExpanded ? ` ${styles.pigBtnActive}` : ''} pig-btn`}
@@ -51,7 +50,8 @@ const Tile = React.memo(function Tile({
         transform: transform.interpolate(t => t)
       }}
     >
-      {scrollSpeed === 'medium' &&
+
+      {useLqip &&
         // LQIP
         <img
           className={`${styles.pigImg} ${styles.pigThumbnail}${isFullSizeLoaded ? ` ${styles.pigThumbnailLoaded}` : ''}`}
@@ -62,7 +62,8 @@ const Tile = React.memo(function Tile({
           alt=""
         />
       }
-      {(scrollSpeed === 'slow' || scrollSpeed === 'medium') && !isVideo &&
+      
+      {(scrollSpeed === 'slow' ) && !isVideo &&
         // grid image
         <img
           className={`${styles.pigImg} ${styles.pigFull}${isFullSizeLoaded ? ` ${styles.pigFullLoaded}` : ''}`}
@@ -72,7 +73,7 @@ const Tile = React.memo(function Tile({
         />
       }
 
-      {(scrollSpeed === 'slow' || scrollSpeed === 'medium') && isVideo &&
+      {(scrollSpeed === 'slow' ) && isVideo &&
         <video
           className={`${styles.pigImg} ${styles.pigThumbnail}${isFullSizeLoaded ? ` ${styles.pigThumbnailLoaded}` : ''}`}
           src={getUrl(item.url, getImageHeight(containerWidth))}
