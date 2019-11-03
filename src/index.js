@@ -49,7 +49,7 @@ export default class Pig extends Component {
     }
 
     this.scrollThrottleMs = 300
-    this.windowHeight = window.innerHeight,
+    this.windowHeight = typeof window !== 'undefined' ? window.innerHeight : 1000, // arbitrary height
     this.containerOffsetTop = null
     this.totalHeight = 0
 
@@ -72,6 +72,8 @@ export default class Pig extends Component {
       groupGapSm: props.groupGapSm,
       groupGapLg: props.groupGapLg,
     }
+
+    if (typeof window === 'undefined') return
 
     this.throttledScroll = throttle(this.onScroll, this.scrollThrottleMs)
     this.debouncedResize = debounce(this.onResize, 500)
@@ -158,11 +160,14 @@ export default class Pig extends Component {
     this.container = this.containerRef.current
     this.containerOffsetTop = this.container.offsetTop
     this.containerWidth = this.container.offsetWidth
-    window.addEventListener('scroll', this.throttledScroll)
-    window.addEventListener('resize', this.debouncedResize)
 
     this.imageData = this.getUpdatedImageLayout()
     this.setRenderedItems(this.imageData)
+
+    if (typeof window === 'undefined') return
+    window.addEventListener('scroll', this.throttledScroll)
+    window.addEventListener('resize', this.debouncedResize)
+
   }
 
   componentWillUnmount() {

@@ -31,7 +31,7 @@ export default ({ item, windowHeight, settings, containerWidth, containerOffsetT
 
   // calculate the offset position in the center of the screen
   const offsetX = (containerWidth / 2) - (calcWidth / 2)
-  const offsetY = window.scrollY + (windowHeight / 2) - (calcHeight / 2) - containerOffsetTop
+  const offsetY = (typeof window !== 'undefined' ? window.scrollY : 0) + (windowHeight / 2) - (calcHeight / 2) - containerOffsetTop
 
   return { calcWidth, calcHeight, offsetX, offsetY }
 }
