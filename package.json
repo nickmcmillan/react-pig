@@ -1,6 +1,6 @@
 {
   "name": "react-pig",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Arrange images in a responsive, progressive-loading grid managed in JavaScript using CSS transforms.",
   "author": "nickmcmillan",
   "license": "MIT",
