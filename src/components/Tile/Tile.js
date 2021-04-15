@@ -27,7 +27,7 @@ const Tile = React.memo(function Tile({
   // gridPosition is what has been set by the grid layout logic (in the parent component)
   const gridPosition = `translate3d(${item.style.translateX}px, ${item.style.translateY}px, 0)`
   // screenCenter is positioning logic for when the item is active and expanded
-  const screenCenter = `translate3d(${offsetX}px, ${offsetY}, 0)`
+  const screenCenter = `translate3d(${offsetX}px, ${offsetY}px, 0)`
 
   const { width, height, transform, zIndex } = useSpring({
     transform: isExpanded ? screenCenter : gridPosition,
