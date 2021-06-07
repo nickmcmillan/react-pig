@@ -25,7 +25,7 @@ export default class Pig extends Component {
     this.getUrl = props.getUrl || getUrl
 
     // if handleClick has been provided as a prop, use it. otherwise use the default handleClick from /utils
-    this.handleClick = props.handleClick || defaultHandleClick
+    this.handleClick = props.handleClick || this.defaultHandleClick
 
     this.imageData = props.imageData
 
