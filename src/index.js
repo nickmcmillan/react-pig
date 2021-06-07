@@ -10,7 +10,6 @@ import computeLayout from './computeLayout'
 import computeLayoutGroups from './computeLayoutGroups'
 import getUrl from './utils/getUrl'
 import sortByDate from './utils/sortByDate'
-import groupByDate from './utils/groupByDate'
 import getScrollSpeed from './utils/getScrollSpeed'
 
 import styles from './styles.css'
@@ -24,6 +23,9 @@ export default class Pig extends Component {
 
     // if getUrl has been provided as a prop, use it. otherwise use the default getUrl from /utils
     this.getUrl = props.getUrl || getUrl
+
+    // if handleClick has been provided as a prop, use it. otherwise use the default handleClick from /utils
+    this.handleClick = props.handleClick || defaultHandleClick
 
     this.imageData = props.imageData
 
@@ -123,6 +125,20 @@ export default class Pig extends Component {
     this.windowHeight = window.innerHeight
   }
 
+  defaultHandleClick = (item) => {
+    // if an image is already the width of the container, don't expand it on click
+    if (item.style.width >= this.containerWidth) {
+      this.setState({ activeTileUrl: null })
+      return
+    }
+
+    this.setState({
+      // if Tile is already active, deactivate it
+      activeTileUrl: item.url !== this.state.activeTileUrl ? item.url : null
+    })
+  }
+
+
   getUpdatedImageLayout() {
     const wrapperWidth = this.container.offsetWidth
 
@@ -185,18 +201,7 @@ export default class Pig extends Component {
       item={item}
       gridGap={this.settings.gridGap}
       getUrl={this.getUrl}
-      handleClick={item => {
-        // if an image is already the width of the container, don't expand it on click
-        if (item.style.width >= this.containerWidth) {
-          this.setState({ activeTileUrl: null })
-          return
-        }
-
-        this.setState({
-          // if Tile is already active, deactivate it
-          activeTileUrl: item.url !== this.state.activeTileUrl ? item.url : null
-        })
-      }}
+      handleClick={this.handleClick}
       activeTileUrl={this.state.activeTileUrl}
       settings={this.settings}
       thumbnailSize={this.props.thumbnailSize}
