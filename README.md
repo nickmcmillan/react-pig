@@ -61,9 +61,28 @@ class App extends Component {
 
 export default App
 ```
+## Development
 
+You have to install yarn:
+```
+npm install --global yarn
+```
+Use the yarn commands to install and continuously build react-pig:
+```
+yarn install
+yarn run build
+yarn start
+```
+To test your changes to the component, build and serve the example:
+```
+cd /example
+yarn install
+yarn start
+```
+You should now be able to see the website, with the changed component, at localhost:3000
 
 This React library was packaged with https://github.com/transitive-bullshit/create-react-library
+
 
 ## License
 
