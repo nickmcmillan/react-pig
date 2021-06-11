@@ -79,3 +79,26 @@
   position: absolute;
   z-index: -1;
 } */
+
+.pigBtn:hover .checkbox {
+  opacity: 0.5;
+  transition: all 200ms linear;
+}
+
+.pigBtn:hover .checkbox:checked {
+  opacity: 1;
+}
+
+.checkbox {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  opacity: 0;
+}
+
+.checkbox:checked {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  opacity: 1;
+}
