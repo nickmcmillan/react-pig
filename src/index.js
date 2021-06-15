@@ -27,6 +27,9 @@ export default class Pig extends Component {
 
     this.imageData = props.imageData
 
+    this.selectable = props.selectable || false
+    this.handleSelection = props.handleSelection || this.defaultHandleSelection
+
     // if sortFunc has been provided as a prop, use it
     if (props.sortFunc) this.imageData.sort(props.sortFunc)
     else if (props.sortByDate) this.imageData = sortByDate(this.imageData)
@@ -44,6 +47,7 @@ export default class Pig extends Component {
 
     this.state = {
       renderedItems: [],
+      selectedItems: [],
       scrollSpeed: 'slow',
       activeTileUrl: null
     }
@@ -95,6 +99,16 @@ export default class Pig extends Component {
     this.setState({ renderedItems })
   }
 
+  defaultHandleSelection = (item) => {
+    let newSelectedItems = this.state.selectedItems
+    if (newSelectedItems.includes(item)) {
+      newSelectedItems = newSelectedItems.filter(value => value !== item)
+    } else {
+      newSelectedItems = newSelectedItems.concat(item)
+    }
+    this.setState({selectedItems : newSelectedItems})
+  };
+
   onScroll = () => {
     this.previousYOffset = this.latestYOffset || window.pageYOffset
     this.latestYOffset = window.pageYOffset
@@ -108,7 +122,7 @@ export default class Pig extends Component {
         this.setState({ scrollSpeed }) // scroll idle callback
       })
       this.setState({ scrollSpeed })
-      
+
       // dismiss any active Tile
       if (this.state.activeTileUrl) this.setState({ activeTileUrl: null })
     })
@@ -197,6 +211,9 @@ export default class Pig extends Component {
           activeTileUrl: item.url !== this.state.activeTileUrl ? item.url : null
         })
       }}
+      handleSelection={this.handleSelection}
+      selectable={this.selectable}
+      selected={this.props.selectedItems ? this.props.selectedItems.find(selectedItem => selectedItem.id === item.id) : this.state.selectedItems.includes(item)}
       activeTileUrl={this.state.activeTileUrl}
       settings={this.settings}
       thumbnailSize={this.props.thumbnailSize}
