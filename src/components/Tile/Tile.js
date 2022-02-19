@@ -104,7 +104,7 @@ const Tile = React.memo(function Tile({
       {isExpanded && !isVideo && (
         // full size expanded image
         <img
-          className={`${styles.pigImg} fullqual`}
+          className={styles.pigImg}
           src={getUrl(item.url, settings.expandedSize)}
           alt=""
         />
