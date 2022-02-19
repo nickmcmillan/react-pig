@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { useSpring, animated } from 'react-spring'
 import getImageHeight from '../../utils/getImageHeight'
@@ -42,7 +42,7 @@ const Tile = React.memo(function Tile({
     <animated.button
       className={`${styles.pigBtn}${isExpanded ? ` ${styles.pigBtnActive}` : ''} pig-btn`}
       onClick={() => handleClick(item)}
-      onMouseEnter={() => {console.log("detectedmousein"); setShowSecondaryImage(true)}}
+      onMouseEnter={() => {if (item.secondaryUrl) {setShowSecondaryImage(true)}}}
       onMouseLeave={() => {setShowSecondaryImage(false)}}
       style={{
         outline: isExpanded ? `${settings.gridGap}px solid ${settings.bgColor}` : null,
@@ -66,22 +66,23 @@ const Tile = React.memo(function Tile({
         />
       }
 
-      {(scrollSpeed === 'slow' ) && !isVideo && (item.secondaryUrl !== undefined) && showSecondaryImage &&
+      {(scrollSpeed === 'slow' ) && !isVideo &&
         // grid image
         <img
-          className={`${styles.pigImg} ${styles.pigFull}${isFullSizeLoaded ? ` ${styles.pigFullLoaded}` : ''} secondaryimg`}
-          style={{'filter': 'grayscale(100%)'}}
-          src={getUrl(item.secondaryUrl, getImageHeight(containerWidth))}
+          className={`${styles.pigImg} ${styles.pigFull}${isFullSizeLoaded ? ` ${styles.pigFullLoaded}` : ''} midqual`}
+          style={{'opacity': (showSecondaryImage ? '0' : '1')}}
+          src={getUrl(item.url, getImageHeight(containerWidth))}
           alt=""
           onLoad={() => setFullSizeLoaded(true)}
         />
       }
-      
-      {(scrollSpeed === 'slow' ) && !isVideo && ((item.secondaryUrl === undefined) || (item.secondaryUrl !== undefined && !showSecondaryImage)) &&
-        // grid image
+
+      {(scrollSpeed === 'slow' ) && !isVideo && (item.secondaryUrl !== undefined) &&
+        // secondary image
         <img
-          className={`${styles.pigImg} ${styles.pigFull}${isFullSizeLoaded ? ` ${styles.pigFullLoaded}` : ''} midqual`}
-          src={getUrl(item.url, getImageHeight(containerWidth))}
+          className={`${styles.pigImg} ${styles.pigFull}${isFullSizeLoaded ? ` ${styles.pigFullLoaded}` : ''} secondaryimg`}
+          style={{'filter': 'grayscale(100%)', 'opacity': (showSecondaryImage ? '1' : '0')}}
+          src={getUrl(item.secondaryUrl, getImageHeight(containerWidth))}
           alt=""
           onLoad={() => setFullSizeLoaded(true)}
         />
