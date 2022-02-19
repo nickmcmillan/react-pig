@@ -16,7 +16,7 @@ ReactDOM.render(
       groupGapSm={20}
       breakpoint={800}
       // sortByDate
-      groupByDate
+      // groupByDate
     />
   </main>
 , document.getElementById('root'))

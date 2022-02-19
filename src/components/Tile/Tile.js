@@ -21,6 +21,7 @@ const Tile = React.memo(function Tile({
   const isExpanded = activeTileUrl === item.url
   const isVideo = item.url.includes('.mp4') || item.url.includes('.mov')
   const [isFullSizeLoaded, setFullSizeLoaded] = useState(isVideo ? true : false)
+  const [showSecondaryImage, setShowSecondaryImage] = useState(false)
 
   const { calcWidth, calcHeight, offsetX, offsetY } = getTileMeasurements({ item, windowHeight, settings, containerWidth, containerOffsetTop })
 
@@ -41,6 +42,8 @@ const Tile = React.memo(function Tile({
     <animated.button
       className={`${styles.pigBtn}${isExpanded ? ` ${styles.pigBtnActive}` : ''} pig-btn`}
       onClick={() => handleClick(item)}
+      onMouseEnter={() => {console.log("detectedmousein"); setShowSecondaryImage(true)}}
+      onMouseLeave={() => {setShowSecondaryImage(false)}}
       style={{
         outline: isExpanded ? `${settings.gridGap}px solid ${settings.bgColor}` : null,
         backgroundColor: item.dominantColor,
@@ -54,7 +57,7 @@ const Tile = React.memo(function Tile({
       {useLqip &&
         // LQIP
         <img
-          className={`${styles.pigImg} ${styles.pigThumbnail}${isFullSizeLoaded ? ` ${styles.pigThumbnailLoaded}` : ''}`}
+          className={`${styles.pigImg} ${styles.pigThumbnail}${isFullSizeLoaded ? ` ${styles.pigThumbnailLoaded}` : ''} lowqual`}
           src={getUrl(item.url, settings.thumbnailSize)}
           loading="lazy"
           width={item.style.width}
@@ -62,11 +65,22 @@ const Tile = React.memo(function Tile({
           alt=""
         />
       }
-      
-      {(scrollSpeed === 'slow' ) && !isVideo &&
+
+      {(scrollSpeed === 'slow' ) && !isVideo && (item.secondaryUrl !== undefined) && showSecondaryImage &&
         // grid image
         <img
-          className={`${styles.pigImg} ${styles.pigFull}${isFullSizeLoaded ? ` ${styles.pigFullLoaded}` : ''}`}
+          className={`${styles.pigImg} ${styles.pigFull}${isFullSizeLoaded ? ` ${styles.pigFullLoaded}` : ''} secondaryimg`}
+          style={{'filter': 'grayscale(100%)'}}
+          src={getUrl(item.secondaryUrl, getImageHeight(containerWidth))}
+          alt=""
+          onLoad={() => setFullSizeLoaded(true)}
+        />
+      }
+      
+      {(scrollSpeed === 'slow' ) && !isVideo && ((item.secondaryUrl === undefined) || (item.secondaryUrl !== undefined && !showSecondaryImage)) &&
+        // grid image
+        <img
+          className={`${styles.pigImg} ${styles.pigFull}${isFullSizeLoaded ? ` ${styles.pigFullLoaded}` : ''} midqual`}
           src={getUrl(item.url, getImageHeight(containerWidth))}
           alt=""
           onLoad={() => setFullSizeLoaded(true)}
@@ -88,7 +102,7 @@ const Tile = React.memo(function Tile({
       {isExpanded && !isVideo && (
         // full size expanded image
         <img
-          className={styles.pigImg}
+          className={`${styles.pigImg} fullqual`}
           src={getUrl(item.url, settings.expandedSize)}
           alt=""
         />
