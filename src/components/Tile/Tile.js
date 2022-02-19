@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { useSpring, animated } from 'react-spring'
 import getImageHeight from '../../utils/getImageHeight'
@@ -42,7 +42,7 @@ const Tile = React.memo(function Tile({
     <animated.button
       className={`${styles.pigBtn}${isExpanded ? ` ${styles.pigBtnActive}` : ''} pig-btn`}
       onClick={() => handleClick(item)}
-      onMouseEnter={() => {if (item.secondaryUrl) {setShowSecondaryImage(true)}}}
+      onMouseEnter={() => {if (item.secondaryUrl && window.innerWidth > 600) {setShowSecondaryImage(true)}}}
       onMouseLeave={() => {setShowSecondaryImage(false)}}
       style={{
         outline: isExpanded ? `${settings.gridGap}px solid ${settings.bgColor}` : null,
@@ -57,7 +57,7 @@ const Tile = React.memo(function Tile({
       {useLqip &&
         // LQIP
         <img
-          className={`${styles.pigImg} ${styles.pigThumbnail}${isFullSizeLoaded ? ` ${styles.pigThumbnailLoaded}` : ''} lowqual`}
+          className={`${styles.pigImg} ${styles.pigThumbnail}${isFullSizeLoaded ? ` ${styles.pigThumbnailLoaded}` : ''}`}
           src={getUrl(item.url, settings.thumbnailSize)}
           loading="lazy"
           width={item.style.width}
@@ -67,9 +67,9 @@ const Tile = React.memo(function Tile({
       }
 
       {(scrollSpeed === 'slow' ) && !isVideo &&
-        // grid image
+        // full sized thumbnail
         <img
-          className={`${styles.pigImg} ${styles.pigFull}${isFullSizeLoaded ? ` ${styles.pigFullLoaded}` : ''} midqual`}
+          className={`${styles.pigImg} ${styles.pigFull}${isFullSizeLoaded ? ` ${styles.pigFullLoaded}` : ''}`}
           style={{'opacity': (showSecondaryImage ? '0' : '1')}}
           src={getUrl(item.url, getImageHeight(containerWidth))}
           alt=""
@@ -78,10 +78,10 @@ const Tile = React.memo(function Tile({
       }
 
       {(scrollSpeed === 'slow' ) && !isVideo && (item.secondaryUrl !== undefined) &&
-        // secondary image
+        // optional secondary image that appears on hover
         <img
-          className={`${styles.pigImg} ${styles.pigFull}${isFullSizeLoaded ? ` ${styles.pigFullLoaded}` : ''} secondaryimg`}
-          style={{'filter': 'grayscale(100%)', 'opacity': (showSecondaryImage ? '1' : '0')}}
+          className={`${styles.pigImg} ${styles.pigFull}${isFullSizeLoaded ? ` ${styles.pigFullLoaded}` : ''}`}
+          style={{'opacity': (showSecondaryImage ? '1' : '0')}}
           src={getUrl(item.secondaryUrl, getImageHeight(containerWidth))}
           alt=""
           onLoad={() => setFullSizeLoaded(true)}
