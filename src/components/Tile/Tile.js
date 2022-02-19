@@ -22,6 +22,7 @@ const Tile = React.memo(function Tile({
   const isVideo = item.url.includes('.mp4') || item.url.includes('.mov')
   const [isFullSizeLoaded, setFullSizeLoaded] = useState(isVideo ? true : false)
   const [showSecondaryImage, setShowSecondaryImage] = useState(false)
+  const minSecondaryWindowWidth = 600 // Minimum window width to enable secondary-image-on-hover functionality
 
   const { calcWidth, calcHeight, offsetX, offsetY } = getTileMeasurements({ item, windowHeight, settings, containerWidth, containerOffsetTop })
 
@@ -42,7 +43,7 @@ const Tile = React.memo(function Tile({
     <animated.button
       className={`${styles.pigBtn}${isExpanded ? ` ${styles.pigBtnActive}` : ''} pig-btn`}
       onClick={() => handleClick(item)}
-      onMouseEnter={() => {if (item.secondaryUrl && window.innerWidth > 600) {setShowSecondaryImage(true)}}}
+      onMouseEnter={() => {if (item.secondaryUrl && window.innerWidth > minSecondaryWindowWidth) {setShowSecondaryImage(true)}}}
       onMouseLeave={() => {setShowSecondaryImage(false)}}
       style={{
         outline: isExpanded ? `${settings.gridGap}px solid ${settings.bgColor}` : null,
@@ -77,7 +78,7 @@ const Tile = React.memo(function Tile({
         />
       }
 
-      {(scrollSpeed === 'slow' ) && !isVideo && (item.secondaryUrl !== undefined) &&
+      {(scrollSpeed === 'slow' ) && !isVideo && (item.secondaryUrl !== undefined) && window.innerWidth > minSecondaryWindowWidth &&
         // optional secondary image that appears on hover
         <img
           className={`${styles.pigImg} ${styles.pigFull}${isFullSizeLoaded ? ` ${styles.pigFullLoaded}` : ''}`}
